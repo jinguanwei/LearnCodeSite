@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学码网 - 程序员技术学习与行业指南</title>
+<meta name="description" content="学码网:一个面向开发者的技术学习门户,涵盖前端、后端、数据库、移动开发、人工智能、云计算运维与开发工具,并提供学习路线、职业规划与求职指导。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230D9488'/%3E%3Cpath d='M20 22l-8 10 8 10' stroke='%23fff' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M44 22l8 10-8 10' stroke='%23fff' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M37 20l-10 26' stroke='%23FDE68A' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --teal-700:#0F766E;
+  --teal-600:#0D9488;
+  --teal-500:#14B8A6;
+  --teal-100:#CCFBF1;
+  --teal-50:#F0FDFA;
+  --ink:#0F172A;
+  --ink-soft:#334155;
+  --ink-mute:#64748B;
+  --bg:#F8FAFC;
+  --surface:#FFFFFF;
+  --line:#E2E8F0;
+  --amber:#B45309;
+  --amber-100:#FEF3C7;
+  --amber-500:#F59E0B;
+  --danger:#B91C1C;
+  --violet:#6D28D9;
+  --violet-100:#EDE9FE;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.06);
+  --shadow-md:0 4px 16px rgba(15,23,42,.08);
+  --shadow-lg:0 12px 32px rgba(15,23,42,.12);
+  --radius:14px;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--teal-500);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+/* ===== 顶部导航 ===== */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-wrap{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:24px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:.5px;color:var(--teal-700);flex-shrink:0}
+.logo svg{width:34px;height:34px}
+.logo b{font-weight:900}
+.nav-links{display:flex;gap:6px;margin-left:8px}
+.nav-links a{padding:8px 14px;border-radius:10px;font-weight:500;font-size:15px;color:var(--ink-soft);transition:all .15s}
+.nav-links a:hover{background:var(--teal-50);color:var(--teal-700)}
+.nav-links a.active{background:var(--teal-600);color:#fff}
+.search-box{flex:1;max-width:340px;margin-left:auto;position:relative}
+.search-box input{
+  width:100%;padding:9px 14px 9px 38px;border:1px solid var(--line);border-radius:24px;
+  font-size:14px;font-family:inherit;background:#fff;transition:border-color .15s;
+}
+.search-box input:focus{outline:none;border-color:var(--teal-500);box-shadow:0 0 0 3px var(--teal-100)}
+.search-box svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink-mute)}
+.menu-btn{display:none;padding:8px;border-radius:8px}
+.menu-btn:hover{background:var(--teal-50)}
+@media(max-width:860px){
+  .nav-links{display:none}
+  .menu-btn{display:block;margin-left:auto}
+  .search-box{display:none}
+  .nav-wrap{gap:12px}
+  .logo{font-size:18px}
+}
+.mobile-nav{
+  display:none;position:fixed;top:64px;left:0;right:0;z-index:99;background:#fff;
+  border-bottom:1px solid var(--line);box-shadow:var(--shadow-md);padding:8px;
+}
+.mobile-nav.open{display:block}
+.mobile-nav a{display:block;padding:12px 16px;border-radius:10px;font-weight:500;color:var(--ink-soft)}
+.mobile-nav a:hover{background:var(--teal-50)}
+.mobile-nav a.active{background:var(--teal-600);color:#fff}
+.mobile-search{display:block;width:100%;margin-bottom:8px;position:relative}
+.mobile-search input{width:100%;padding:10px 14px 10px 38px;border:1px solid var(--line);border-radius:12px;font-family:inherit;font-size:14px}
+.mobile-search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink-mute)}
+
+/* ===== 视图容器 ===== */
+.view{display:none}
+.view.active{display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.page-body{padding:32px 0 64px}
+
+/* ===== Hero ===== */
+.hero{
+  background:linear-gradient(135deg,#0F766E 0%,#0D9488 55%,#14B8A6 100%);
+  color:#fff;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+.hero::before{
+  content:"";position:absolute;right:120px;bottom:-160px;width:320px;height:320px;border-radius:50%;
+  background:rgba(253,230,138,.10);
+}
+.hero-inner{max-width:1200px;margin:0 auto;padding:72px 20px 64px;position:relative;z-index:1}
+.hero h1{font-size:42px;font-weight:900;line-height:1.25;margin-bottom:16px;letter-spacing:.5px}
+.hero h1 .hl{color:#FDE68A}
+.hero p{font-size:18px;max-width:640px;opacity:.92;margin-bottom:30px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;
+  font-weight:600;font-size:15px;transition:transform .12s,box-shadow .12s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#fff;color:var(--teal-700);box-shadow:var(--shadow-md)}
+.btn-primary:hover{box-shadow:var(--shadow-lg)}
+.btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.24)}
+.hero-stats{display:flex;gap:40px;margin-top:44px;flex-wrap:wrap}
+.hero-stats .stat b{font-size:28px;font-weight:900;display:block}
+.hero-stats .stat span{font-size:14px;opacity:.85}
+@media(max-width:720px){
+  .hero h1{font-size:30px}
+  .hero p{font-size:16px}
+  .hero-inner{padding:52px 20px}
+  .hero-stats{gap:24px}
+}
+
+/* ===== 区块标题 ===== */
+.section{padding:48px 0}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:26px;gap:16px;flex-wrap:wrap}
+.section-head h2{font-size:26px;font-weight:900}
+.section-head .sub{color:var(--ink-mute);font-size:15px;margin-top:4px}
+.section-head .more{color:var(--teal-600);font-weight:600;font-size:14px;white-space:nowrap}
+.section-head .more:hover{text-decoration:underline}
+
+/* ===== 分类卡片 ===== */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;transition:transform .15s,box-shadow .15s,border-color .15s;cursor:pointer;
+}
+.cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--teal-500)}
+.cat-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.cat-card h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.cat-card p{font-size:13px;color:var(--ink-mute);margin-bottom:12px;line-height:1.5}
+.cat-card .count{font-size:12px;color:var(--teal-600);font-weight:600;font-family:var(--mono)}
+@media(max-width:960px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.cat-grid{grid-template-columns:1fr}}
+
+/* ===== 精选教程 ===== */
+.tut-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tut-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;transition:transform .15s,box-shadow .15s;cursor:pointer;
+}
+.tut-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.tut-tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:12px}
+.tut-card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.tut-card p{font-size:13px;color:var(--ink-mute);line-height:1.5;margin-bottom:14px}
+.tut-card .meta{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--ink-mute)}
+.tut-card .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--teal-500)}
+.tut-card .meta .chapters{display:inline-flex;align-items:center;gap:5px}
+.tut-card .progress-bar{height:4px;background:var(--line);border-radius:4px;margin-top:14px;overflow:hidden}
+.tut-card .progress-bar i{display:block;height:100%;background:var(--teal-500);border-radius:4px}
+@media(max-width:900px){.tut-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.tut-grid{grid-template-columns:1fr}}
+
+/* ===== 学习路线 ===== */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.road-card{
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface) 100%);
+  border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:transform .15s,box-shadow .15s;cursor:pointer;
+}
+.road-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.road-card .step-no{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal-600);margin-bottom:10px}
+.road-card h3{font-size:17px;font-weight:700;margin-bottom:10px}
+.road-card ol{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.road-card ol li{font-size:13.5px;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start}
+.road-card ol li::before{content:"";flex-shrink:0;width:18px;height:18px;border-radius:50%;border:2px solid var(--teal-500);margin-top:2px;position:relative}
+.road-card ol li::after{display:none}
+.road-card ol li:nth-child(even)::before{border-color:var(--amber-500)}
+.road-card ol li span{line-height:1.45}
+@media(max-width:900px){.roadmap{grid-template-columns:1fr}}
+
+/* ===== 代码示例 ===== */
+.code-demo{
+  background:var(--ink);border-radius:var(--radius);padding:26px;color:#E2E8F0;overflow:hidden;
+  box-shadow:var(--shadow-lg);position:relative;
+}
+.code-demo .bar{display:flex;gap:8px;margin-bottom:18px}
+.code-demo .bar i{width:12px;height:12px;border-radius:50%;display:block}
+.code-demo pre{font-family:var(--mono);font-size:14px;line-height:1.7;overflow-x:auto}
+.code-demo .tok-kw{color:#FBBF24}
+.code-demo .tok-fn{color:#7DD3FC}
+.code-demo .tok-str{color:#86EFAC}
+.code-demo .tok-num{color:#F9A8D4}
+.code-demo .tok-cm{color:#64748B}
+.code-demo .tok-var{color:#C4B5FD}
+@media(max-width:720px){.code-demo pre{font-size:12.5px}}
+
+/* ===== 行业指导 ===== */
+.guide-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.guide-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;transition:transform .15s,box-shadow .15s;cursor:pointer;
+}
+.guide-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.guide-card .gi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.guide-card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.guide-card p{font-size:13px;color:var(--ink-mute);line-height:1.5}
+.guide-card .more{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:var(--teal-600)}
+@media(max-width:960px){.guide-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.guide-grid{grid-template-columns:1fr}}
+
+/* ===== 页脚 ===== */
+.site-footer{background:var(--ink);color:#94A3B8;padding:52px 0 36px;margin-top:48px}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+.footer-inner h4{color:#fff;font-size:15px;font-weight:700;margin-bottom:14px}
+.footer-inner a{display:block;padding:5px 0;font-size:14px;color:#94A3B8;transition:color .15s}
+.footer-inner a:hover{color:var(--teal-400,#2DD4BF)}
+.footer-brand p{font-size:13.5px;line-height:1.7;margin-top:10px}
+.footer-brand .logo{color:#fff}
+.footer-bottom{max-width:1200px;margin:34px auto 0;padding:20px 20px 0;border-top:1px solid rgba(148,163,184,.2);font-size:13px;color:#64748B;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:560px){.footer-inner{grid-template-columns:1fr}}
+
+/* ===== 技术分类视图 ===== */
+.page-title{padding:40px 0 8px}
+.page-title .eyebrow{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--teal-600);letter-spacing:1px;text-transform:uppercase}
+.page-title h1{font-size:34px;font-weight:900;margin:8px 0 10px}
+.page-title p{color:var(--ink-mute);font-size:16px;max-width:720px}
+.category-block{margin-bottom:44px}
+.category-block-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.category-block-head .ci{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.category-block-head h2{font-size:22px;font-weight:800}
+.category-block-head span.desc{font-size:13px;color:var(--ink-mute)}
+.tut-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:10px;transition:transform .12s,box-shadow .12s;cursor:pointer}
+.tut-row:hover{transform:translateX(4px);box-shadow:var(--shadow-sm);border-color:var(--teal-500)}
+.tut-row .rank{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink-mute);width:28px;text-align:center;flex-shrink:0}
+.tut-row .name{flex:1;font-weight:600;font-size:15px}
+.tut-row .name small{display:block;font-weight:400;color:var(--ink-mute);font-size:12.5px;margin-top:2px}
+.tut-row .level{font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;flex-shrink:0}
+.tut-row .meta{font-size:12px;color:var(--ink-mute);font-family:var(--mono);flex-shrink:0}
+@media(max-width:640px){
+  .tut-row .meta{display:none}
+  .tut-row .level{display:none}
+}
+
+/* ===== 搜索下拉 ===== */
+.search-result{
+  position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid var(--line);
+  border-radius:12px;box-shadow:var(--shadow-lg);max-height:340px;overflow:auto;z-index:120;display:none;
+}
+.search-result.open{display:block}
+.search-result .s-item{padding:11px 14px;font-size:14px;cursor:pointer;display:flex;gap:10px;align-items:center}
+.search-result .s-item:hover{background:var(--teal-50)}
+.search-result .s-item .t{font-weight:600}
+.search-result .s-item .c{font-size:12px;color:var(--ink-mute);font-family:var(--mono)}
+.search-result .s-empty{padding:18px;text-align:center;color:var(--ink-mute);font-size:14px}
+
+/* ===== 内容页(教程详情) ===== */
+.content-layout{display:grid;grid-template-columns:240px 1fr;gap:30px;align-items:start}
+.content-sidebar{position:sticky;top:84px}
+.content-sidebar .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--teal-600);margin-bottom:16px}
+.content-sidebar nav{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.content-sidebar nav a{display:block;padding:10px 16px;font-size:13.5px;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+.content-sidebar nav a:hover{background:var(--teal-50);color:var(--teal-700)}
+.content-sidebar nav a.on{background:var(--teal-600);color:#fff;border-color:var(--teal-600)}
+.content-main{min-width:0}
+.article{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px}
+.article .crumb{font-size:13px;color:var(--ink-mute);margin-bottom:18px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.article .crumb a:hover{color:var(--teal-600)}
+.article h1{font-size:28px;font-weight:900;margin-bottom:8px}
+.article .lede{color:var(--ink-mute);font-size:15px;margin-bottom:24px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.article h2{font-size:20px;font-weight:800;margin:30px 0 12px;padding-left:12px;border-left:4px solid var(--teal-500)}
+.article h3{font-size:17px;font-weight:700;margin:22px 0 10px}
+.article p{font-size:15px;color:var(--ink-soft);margin-bottom:14px}
+.article ul,.article ol{margin:0 0 16px 22px;color:var(--ink-soft);font-size:15px}
+.article li{margin-bottom:6px}
+.article .tip{background:var(--teal-50);border:1px solid var(--teal-100);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--teal-700);margin:18px 0}
+.article .warn{background:var(--amber-100);border:1px solid #FDE68A;border-radius:12px;padding:14px 16px;font-size:14px;color:var(--amber);margin:18px 0}
+.article pre{background:var(--ink);color:#E2E8F0;border-radius:10px;padding:16px;font-family:var(--mono);font-size:13.5px;line-height:1.7;overflow-x:auto;margin:16px 0}
+.article code{font-family:var(--mono);background:var(--teal-50);color:var(--teal-700);padding:2px 6px;border-radius:6px;font-size:13px}
+.article pre code{background:none;color:inherit;padding:0}
+.article table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;table-layout:fixed}
+.article th,.article td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.article th{background:var(--teal-50);font-weight:700;color:var(--teal-700)}
+@media(max-width:900px){
+  .content-layout{grid-template-columns:1fr}
+  .content-sidebar{position:static;order:2}
+  .article{padding:22px}
+}
+/* ===== 移动端可读性微调 ===== */
+@media(max-width:640px){
+  .cat-card p,.tut-card p,.guide-card p,.road-card ol li{font-size:14px}
+  .cat-card .count,.tut-card .meta,.tut-row .name small{font-size:13px}
+  .nav-links a,.footer-inner a{padding-top:10px;padding-bottom:10px}
+  .section-head .more{min-height:44px;display:inline-flex;align-items:center}
+}
+/* ===== 分类子页面 ===== */
+.category-page{max-width:960px;margin:0 auto}
+.cat-hero{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm)}
+.cat-hero .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--teal-600);margin-bottom:18px}
+.cat-hero .back:hover{text-decoration:underline}
+.cat-hero-head{display:flex;gap:20px;align-items:flex-start}
+.cat-hero-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cat-hero-head .eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-mute);letter-spacing:1px;text-transform:uppercase}
+.cat-hero-head h1{font-size:30px;font-weight:900;margin:4px 0 8px}
+.cat-hero-head p{color:var(--ink-mute);font-size:15px;max-width:640px;line-height:1.6}
+.cat-hero-list{margin-top:22px}
+.cat-hero-list .crumb{font-size:13px;color:var(--ink-mute);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.cat-hero-list .crumb a:hover{color:var(--teal-600)}
+@media(max-width:640px){.cat-hero{padding:20px}.cat-hero-head{flex-direction:column;gap:12px}.cat-hero-head h1{font-size:24px}}
+/* ===== 分类子页面:搜索与筛选 ===== */
+.cat-filter{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:20px 0 6px}
+.cat-search{position:relative;flex:1;min-width:200px}
+.cat-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-mute)}
+.cat-search input{width:100%;padding:10px 14px 10px 38px;border:1px solid var(--line);border-radius:12px;font-family:inherit;font-size:15px;background:var(--bg);transition:border-color .15s}
+.cat-search input:focus{outline:none;border-color:var(--teal-500);box-shadow:0 0 0 3px var(--teal-100)}
+.lv-filter{display:flex;gap:8px;flex-wrap:wrap}
+.lv-btn{padding:8px 16px;border-radius:20px;font-size:14px;font-weight:600;border:1px solid var(--line);color:var(--ink-soft);background:#fff;transition:all .15s}
+.lv-btn:hover{border-color:var(--teal-500);color:var(--teal-700)}
+.lv-btn.on{background:var(--teal-600);border-color:var(--teal-600);color:#fff}
+.cat-result-count{font-size:13px;color:var(--ink-mute);font-family:var(--mono)}
+.cat-list{margin-top:12px}
+.cat-empty{padding:32px;text-align:center;color:var(--ink-mute);font-size:15px;background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius)}
+.tut-title-link{color:var(--ink);font-weight:600}
+.tut-title-link:hover{color:var(--teal-600);text-decoration:underline}
+@media(max-width:640px){.cat-search{min-width:100%}}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部导航 ===== -->
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="logo" href="#/home" data-nav="home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0D9488"/><path d="M20 22l-8 10 8 10" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 22l8 10-8 10" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M37 20l-10 26" stroke="#FDE68A" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+      <b>学码网</b>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#/home" data-nav="home">首页</a>
+      <a href="#/tech" data-nav="tech">技术分类</a>
+      <a href="#/guide" data-nav="guide">行业指导</a>
+    </nav>
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="搜索教程或指南,如 Python、学习路线…" autocomplete="off">
+      <div class="search-result" id="searchResult"></div>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="打开菜单" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink-mute)"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input type="text" id="mobileSearchInput" placeholder="搜索教程或指南…">
+  </div>
+  <a href="#/home" data-nav="home">首页</a>
+  <a href="#/tech" data-nav="tech">技术分类</a>
+  <a href="#/guide" data-nav="guide">行业指导</a>
+</div>
+
+<!-- ===== 视图：首页 ===== -->
+<div class="view" id="view-home">
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>从零开始,<span class="hl">系统地</span>学会一门技术</h1>
+      <p>学码网汇集了前端、后端、数据库、移动开发、人工智能与云计算等热门技术的中文教程,配以清晰的分类导航与学习路线,让零基础也能一步步上手。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#/tech">浏览技术分类</a>
+        <a class="btn btn-ghost" href="#/guide">查看学习路线</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>83+</b><span>精选教程</span></div>
+        <div class="stat"><b>8</b><span>技术大类</span></div>
+        <div class="stat"><b>6</b><span>行业指南</span></div>
+        <div class="stat"><b>100%</b><span>中文内容</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>技术分类</h2>
+          <p class="sub">按学习路径组织的七大技术方向,找到适合你的那一个</p>
+        </div>
+        <a class="more" href="#/tech">全部分类 →</a>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="openCat('前端开发')">
+          <div class="cat-icon" style="background:#CCFBF1;color:#0F766E"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>前端开发</h3>
+          <p>HTML、CSS、JavaScript 及主流框架,构建用户界面与交互体验。</p>
+          <span class="count">12 篇教程</span>
+        </div>
+        <div class="cat-card" onclick="openCat('后端开发')">
+          <div class="cat-icon" style="background:#EDE9FE;color:#6D28D9"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2"/><path d="M12 4v12"/><path d="M8 16l4 4 4-4"/></svg></div>
+          <h3>后端开发</h3>
+          <p>Python、Java、Go 等语言与服务端框架,处理业务逻辑与数据。</p>
+          <span class="count">16 篇教程</span>
+        </div>
+        <div class="cat-card" onclick="openCat('数据库')">
+          <div class="cat-icon" style="background:#FEF3C7;color:#B45309"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></div>
+          <h3>数据库</h3>
+          <p>关系型与非关系型数据库,数据建模、查询与性能优化。</p>
+          <span class="count">10 篇教程</span>
+        </div>
+        <div class="cat-card" onclick="openCat('移动开发')">
+          <div class="cat-icon" style="background:#FCE7F3;color:#BE185D"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <h3>移动开发</h3>
+          <p>Android、iOS、Flutter 与小程序,构建跨端与原生应用。</p>
+          <span class="count">10 篇教程</span>
+        </div>
+        <div class="cat-card" onclick="openCat('人工智能')">
+          <div class="cat-icon" style="background:#E0F2FE;color:#0369A1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M5 12H3"/><path d="M21 12h-2"/><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M4 8l2.5 2.5"/><path d="M20 8l-2.5 2.5"/><path d="M4 16l2.5-2.5"/><path d="M20 16l-2.5-2.5"/></svg></div>
+          <h3>人工智能</h3>
+          <p>机器学习、深度学习与大模型应用,入门到实战。</p>
+          <span class="count">10 篇教程</span>
+        </div>
+        <div class="cat-card" onclick="openCat('云计算运维')">
+          <div class="cat-icon" style="background:#DCFCE7;color:#15803D"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+          <h3>云计算与运维</h3>
+          <p>Linux、Docker、Kubernetes 与云服务,部署与容器化。</p>
+          <span class="count">9 篇教程</span>
+        </div>
+        <div class="cat-card" onclick="openCat('嵌入式开发')">
+          <div class="cat-icon" style="background:#E0E7FF;color:#4F46E5"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h6"/></svg></div>
+          <h3>嵌入式开发</h3>
+          <p>51 单片机与 STM32,GPIO、中断、定时器与串口,开发硬件与底层。</p>
+          <span class="count">6 篇教程</span>
+        </div>
+        <div class="cat-card" onclick="openCat('计算机基础')">
+          <div class="cat-icon" style="background:#FFEDD5;color:#EA580C"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg></div>
+          <h3>计算机基础</h3>
+          <p>计算机组成、数据结构、算法、设计模式与网络协议,夯实核心基础。</p>
+          <span class="count">10 篇教程</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>热门教程</h2>
+          <p class="sub">社区最常访问的入门教程,帮你快速建立知识框架</p>
+        </div>
+        <a class="more" href="#/tech">浏览全部 →</a>
+      </div>
+      <div class="tut-grid">
+        <div class="tut-card" onclick="openTut('HTML 入门','html')">
+          <span class="tut-tag" style="background:#CCFBF1;color:#0F766E">前端</span>
+          <h3>HTML 入门教程</h3>
+          <p>从文档结构、常用标签到表单与多媒体,零基础掌握网页骨架。</p>
+          <div class="meta"><span>12 章节</span><span class="dot"></span><span class="chapters">标签 · 表单 · 语义化</span></div>
+          <div class="progress-bar"><i style="width:62%"></i></div>
+        </div>
+        <div class="tut-card" onclick="openTut('Python 入门','python')">
+          <span class="tut-tag" style="background:#EDE9FE;color:#6D28D9">后端</span>
+          <h3>Python 入门教程</h3>
+          <p>语法、数据结构、函数与文件操作,脚本到自动化处理的完整入门。</p>
+          <div class="meta"><span>16 章节</span><span class="dot"></span><span class="chapters">语法 · 数据结构 · 函数</span></div>
+          <div class="progress-bar"><i style="width:78%"></i></div>
+        </div>
+        <div class="tut-card" onclick="openTut('MySQL 入门','mysql')">
+          <span class="tut-tag" style="background:#FEF3C7;color:#B45309">数据库</span>
+          <h3>MySQL 入门教程</h3>
+          <p>建库建表、增删改查与索引优化,关系型数据库的必修课。</p>
+          <div class="meta"><span>14 章节</span><span class="dot"></span><span class="chapters">SQL · 索引 · 事务</span></div>
+          <div class="progress-bar"><i style="width:50%"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>推荐学习路线</h2>
+          <p class="sub">按目标拆解的成长路径,每一步都有明确的方向</p>
+        </div>
+        <a class="more" href="#/guide">全部路线 →</a>
+      </div>
+      <div class="roadmap">
+        <div class="road-card" onclick="openGuide('前端工程师路线','g-front')">
+          <div class="step-no">ROADMAP 01</div>
+          <h3>前端工程师路线</h3>
+          <ol>
+            <li><span>HTML / CSS 页面基础</span></li>
+            <li><span>JavaScript 语言与 DOM</span></li>
+            <li><span>Vue / React 框架实战</span></li>
+            <li><span>工程化与性能优化</span></li>
+          </ol>
+        </div>
+        <div class="road-card" onclick="openGuide('后端工程师路线','g-back')">
+          <div class="step-no">ROADMAP 02</div>
+          <h3>后端工程师路线</h3>
+          <ol>
+            <li><span>一门语言 (Python/Java/Go)</span></li>
+            <li><span>数据库设计与 SQL</span></li>
+            <li><span>Web 框架与接口开发</span></li>
+            <li><span>分布式与高并发进阶</span></li>
+          </ol>
+        </div>
+        <div class="road-card" onclick="openGuide('AI 工程师路线','g-ai')">
+          <div class="step-no">ROADMAP 03</div>
+          <h3>AI 工程师路线</h3>
+          <ol>
+            <li><span>Python 与数学基础</span></li>
+            <li><span>机器学习核心算法</span></li>
+            <li><span>深度学习框架 PyTorch</span></li>
+            <li><span>大模型应用与微调</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="code-demo">
+        <div class="bar"><i style="background:#F87171"></i><i style="background:#FBBF24"></i><i style="background:#34D399"></i></div>
+        <pre><code><span class="tok-cm"># hello.py —— 入门第一课</span>
+<span class="tok-kw">def</span> <span class="tok-fn">greet</span>(name):
+    <span class="tok-kw">return</span> <span class="tok-str">f"你好, </span>{name}<span class="tok-str">! 欢迎来到学码网。"</span>
+
+names = [<span class="tok-str">"前端"</span>, <span class="tok-str">"后端"</span>, <span class="tok-str">"AI"</span>]
+<span class="tok-kw">for</span> n <span class="tok-kw">in</span> names:
+    print(<span class="tok-fn">greet</span>(n))</code></pre>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ===== 视图：技术分类 ===== -->
+<div class="view" id="view-tech">
+  <div class="container">
+    <div class="page-title">
+      <div class="eyebrow">TECHNOLOGY CATEGORIES</div>
+      <h1>技术分类</h1>
+      <p>覆盖前端、后端、数据库、移动开发、人工智能、云计算与开发工具的中文教程。选择一个方向,系统地开始学习。</p>
+    </div>
+
+    <div class="page-body" style="padding-top:28px">
+      <!-- 前端开发 -->
+      <div class="category-block" data-cat="前端开发">
+        <div class="category-block-head">
+          <div class="ci" style="background:#CCFBF1;color:#0F766E"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h2>前端开发</h2>
+          <span class="desc">用户界面与交互</span>
+        </div>
+        <div class="tut-row" onclick="openTut('HTML 入门教程','html')"><span class="rank">01</span><div class="name">HTML 入门教程<small>文档结构 · 常用标签 · 表单与多媒体</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('CSS 入门教程','css')"><span class="rank">02</span><div class="name">CSS 入门教程<small>选择器 · 盒模型 · 布局与动画</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">14 章节</span></div>
+        <div class="tut-row" onclick="openTut('JavaScript 教程','js')"><span class="rank">03</span><div class="name">JavaScript 教程<small>语法 · DOM · 事件 · 异步</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">18 章节</span></div>
+        <div class="tut-row" onclick="openTut('TypeScript 入门','ts')"><span class="rank">04</span><div class="name">TypeScript 入门<small>类型系统 · 接口 · 泛型</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('Vue.js 实战','vue')"><span class="rank">05</span><div class="name">Vue.js 实战<small>响应式 · 组件 · 路由与状态管理</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">13 章节</span></div>
+        <div class="tut-row" onclick="openTut('React 实战','react')"><span class="rank">06</span><div class="name">React 实战<small>Hooks · 组件化 · 生态</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">13 章节</span></div>
+        <div class="tut-row" onclick="openTut('Sass/SCSS 样式预处理','sass')"><span class="rank">07</span><div class="name">Sass/SCSS 样式预处理<small>变量 · 嵌套 · 混合与继承</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('Webpack 打包工具','webpack')"><span class="rank">08</span><div class="name">Webpack 打包工具<small>Loader · Plugin · 性能优化</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('Bootstrap 响应式框架','bootstrap')"><span class="rank">09</span><div class="name">Bootstrap 响应式框架<small>栅格 · 组件 · 主题定制</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('jQuery 快速入门','jquery')"><span class="rank">10</span><div class="name">jQuery 快速入门<small>选择器 · DOM 操作 · AJAX</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">9 章节</span></div>
+        <div class="tut-row" onclick="openTut('ES6+ 新特性详解','es6')"><span class="rank">11</span><div class="name">ES6+ 新特性详解<small>解构 · 箭头函数 · 类与模块</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('Vite 构建工具','vite')"><span class="rank">12</span><div class="name">Vite 构建工具<small>极速开发 · 热更新 · 生产构建</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">10 章节</span></div>
+      </div>
+
+      <!-- 后端开发 -->
+      <div class="category-block" data-cat="后端开发">
+        <div class="category-block-head">
+          <div class="ci" style="background:#EDE9FE;color:#6D28D9"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2"/><path d="M12 4v12"/><path d="M8 16l4 4 4-4"/></svg></div>
+          <h2>后端开发</h2>
+          <span class="desc">业务逻辑与接口</span>
+        </div>
+        <div class="tut-row" onclick="openTut('Python 入门教程','python')"><span class="rank">01</span><div class="name">Python 入门教程<small>语法 · 数据结构 · 函数 · 文件</small></div><span class="level" style="background:#EDE9FE;color:#6D28D9">入门</span><span class="meta">16 章节</span></div>
+        <div class="tut-row" onclick="openTut('Java 入门教程','java')"><span class="rank">02</span><div class="name">Java 入门教程<small>面向对象 · 集合 · 异常</small></div><span class="level" style="background:#EDE9FE;color:#6D28D9">入门</span><span class="meta">15 章节</span></div>
+        <div class="tut-row" onclick="openTut('Go 语言入门','go')"><span class="rank">03</span><div class="name">Go 语言入门<small>并发 · 接口 · 标准库</small></div><span class="level" style="background:#EDE9FE;color:#6D28D9">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('PHP 入门教程','php')"><span class="rank">04</span><div class="name">PHP 入门教程<small>语法 · 面向对象 · 与 Web 集成</small></div><span class="level" style="background:#EDE9FE;color:#6D28D9">入门</span><span class="meta">14 章节</span></div>
+        <div class="tut-row" onclick="openTut('Node.js 后端开发','node')"><span class="rank">05</span><div class="name">Node.js 后端开发<small>模块 · 事件循环 · Express</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('Spring Boot 实战','spring')"><span class="rank">06</span><div class="name">Spring Boot 实战<small>依赖注入 · Web · 数据访问</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Flask 快速开发','flask')"><span class="rank">07</span><div class="name">Flask 快速开发<small>路由 · 模板 · 数据库集成</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('微服务架构入门','micro')"><span class="rank">08</span><div class="name">微服务架构入门<small>服务拆分 · 通信 · 治理</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Django 实战','django')"><span class="rank">09</span><div class="name">Django 实战<small>MTV · ORM · 认证与后台</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">13 章节</span></div>
+        <div class="tut-row" onclick="openTut('FastAPI 高性能 API','fastapi')"><span class="rank">10</span><div class="name">FastAPI 高性能 API<small>类型提示 · 依赖注入 · 异步</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('Maven 构建工具','maven')"><span class="rank">11</span><div class="name">Maven 构建工具<small>依赖管理 · 生命周期 · 插件</small></div><span class="level" style="background:#EDE9FE;color:#6D28D9">入门</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('RESTful API 设计规范','rest')"><span class="rank">12</span><div class="name">RESTful API 设计规范<small>资源 · 状态码 · 版本与安全</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">9 章节</span></div>
+      </div>
+
+      <!-- 数据库 -->
+      <div class="category-block" data-cat="数据库">
+        <div class="category-block-head">
+          <div class="ci" style="background:#FEF3C7;color:#B45309"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></div>
+          <h2>数据库</h2>
+          <span class="desc">存储、查询与建模</span>
+        </div>
+        <div class="tut-row" onclick="openTut('MySQL 入门教程','mysql')"><span class="rank">01</span><div class="name">MySQL 入门教程<small>建表 · SQL · 索引 · 事务</small></div><span class="level" style="background:#FEF3C7;color:#B45309">入门</span><span class="meta">14 章节</span></div>
+        <div class="tut-row" onclick="openTut('Redis 入门教程','redis')"><span class="rank">02</span><div class="name">Redis 入门教程<small>数据结构 · 缓存 · 持久化</small></div><span class="level" style="background:#FEF3C7;color:#B45309">入门</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('MongoDB 入门','mongo')"><span class="rank">03</span><div class="name">MongoDB 入门<small>文档模型 · 聚合 · 索引</small></div><span class="level" style="background:#FEF3C7;color:#B45309">入门</span><span class="meta">9 章节</span></div>
+        <div class="tut-row" onclick="openTut('PostgreSQL 进阶','pg')"><span class="rank">04</span><div class="name">PostgreSQL 进阶<small>窗口函数 · 扩展 · 性能</small></div><span class="level" style="background:#FFEDD5;color:#C2410C">进阶</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('SQLite 轻量数据库','sqlite')"><span class="rank">05</span><div class="name">SQLite 轻量数据库<small>嵌入式 · 基础 SQL · Python 集成</small></div><span class="level" style="background:#FEF3C7;color:#B45309">入门</span><span class="meta">8 章节</span></div>
+        <div class="tut-row" onclick="openTut('Elasticsearch 搜索','es')"><span class="rank">06</span><div class="name">Elasticsearch 搜索<small>倒排索引 · 查询 DSL · 分词</small></div><span class="level" style="background:#FFEDD5;color:#C2410C">进阶</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Oracle 数据库基础','oracle')"><span class="rank">07</span><div class="name">Oracle 数据库基础<small>PL/SQL · 表空间 · 常用函数</small></div><span class="level" style="background:#FEF3C7;color:#B45309">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('ClickHouse 列式数据库','clickhouse')"><span class="rank">08</span><div class="name">ClickHouse 列式数据库<small>列式存储 · 表引擎 · 分析查询</small></div><span class="level" style="background:#FFEDD5;color:#C2410C">进阶</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('NoSQL 概览与选型','nosql')"><span class="rank">09</span><div class="name">NoSQL 概览与选型<small>四大类型 · 场景 · CAP 权衡</small></div><span class="level" style="background:#FEF3C7;color:#B45309">入门</span><span class="meta">9 章节</span></div>
+        <div class="tut-row" onclick="openTut('数据库索引与查询优化','idxopt')"><span class="rank">10</span><div class="name">数据库索引与查询优化<small>索引原理 · EXPLAIN · 优化实践</small></div><span class="level" style="background:#FFEDD5;color:#C2410C">进阶</span><span class="meta">11 章节</span></div>
+      </div>
+
+      <!-- 移动开发 -->
+      <div class="category-block" data-cat="移动开发">
+        <div class="category-block-head">
+          <div class="ci" style="background:#FCE7F3;color:#BE185D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <h2>移动开发</h2>
+          <span class="desc">原生与跨端应用</span>
+        </div>
+        <div class="tut-row" onclick="openTut('Android 入门','android')"><span class="rank">01</span><div class="name">Android 入门<small>四大组件 · UI · Jetpack</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">入门</span><span class="meta">14 章节</span></div>
+        <div class="tut-row" onclick="openTut('iOS 入门','ios')"><span class="rank">02</span><div class="name">iOS 入门<small>Swift · UIKit · SwiftUI</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">入门</span><span class="meta">13 章节</span></div>
+        <div class="tut-row" onclick="openTut('Flutter 跨端开发','flutter')"><span class="rank">03</span><div class="name">Flutter 跨端开发<small>Widget · Dart · 状态管理</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('微信小程序开发','mp')"><span class="rank">04</span><div class="name">微信小程序开发<small>框架 · 组件 · 云开发</small></div><span class="level" style="background:#FDF4FF;color:#A21CAF">实战</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('React Native 跨端开发','rn')"><span class="rank">05</span><div class="name">React Native 跨端开发<small>RN 原理 · 导航 · 发布</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">进阶</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('鸿蒙开发入门','harmony')"><span class="rank">06</span><div class="name">鸿蒙开发入门<small>ArkTS · 页面组件 · 端云一体化</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">入门</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('Kotlin 语言入门','kotlin')"><span class="rank">07</span><div class="name">Kotlin 语言入门<small>语法 · 空安全 · 协程</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('Swift 语言入门','swift')"><span class="rank">08</span><div class="name">Swift 语言入门<small>类型推断 · 可选类型 · 闭包</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('uni-app 跨端开发','uniapp')"><span class="rank">09</span><div class="name">uni-app 跨端开发<small>一套多端 · 组件 · 发布</small></div><span class="level" style="background:#FDF4FF;color:#A21CAF">实战</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('PWA 渐进式 Web 应用','pwa')"><span class="rank">10</span><div class="name">PWA 渐进式 Web 应用<small>可安装 · Service Worker · 离线</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">进阶</span><span class="meta">10 章节</span></div>
+      </div>
+
+      <!-- 人工智能 -->
+      <div class="category-block" data-cat="人工智能">
+        <div class="category-block-head">
+          <div class="ci" style="background:#E0F2FE;color:#0369A1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M5 12H3"/><path d="M21 12h-2"/><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M4 8l2.5 2.5"/><path d="M20 8l-2.5 2.5"/><path d="M4 16l2.5-2.5"/><path d="M20 16l-2.5-2.5"/></svg></div>
+          <h2>人工智能</h2>
+          <span class="desc">机器学习与深度学习</span>
+        </div>
+        <div class="tut-row" onclick="openTut('机器学习基础','ml')"><span class="rank">01</span><div class="name">机器学习基础<small>监督学习 · 无监督 · 评估</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">入门</span><span class="meta">13 章节</span></div>
+        <div class="tut-row" onclick="openTut('深度学习入门','dl')"><span class="rank">02</span><div class="name">深度学习入门<small>神经网络 · 反向传播 · CNN</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('PyTorch 实战','pytorch')"><span class="rank">03</span><div class="name">PyTorch 实战<small>张量 · 自动求导 · 训练流程</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('大模型应用开发','llm')"><span class="rank">04</span><div class="name">大模型应用开发<small>Prompt · RAG · 微调 · Agent</small></div><span class="level" style="background:#CFFAFE;color:#0E7490">实战</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('TensorFlow 基础','tf')"><span class="rank">05</span><div class="name">TensorFlow 基础<small>张量 · Keras · 模型部署</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">入门</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('自然语言处理入门','nlp')"><span class="rank">06</span><div class="name">自然语言处理入门<small>文本表示 · 词向量 · 任务</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('计算机视觉入门','cv')"><span class="rank">07</span><div class="name">计算机视觉入门<small>图像表示 · CNN · 目标检测</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('强化学习入门','rl')"><span class="rank">08</span><div class="name">强化学习入门<small>MDP · Q-Learning · 策略梯度</small></div><span class="level" style="background:#0EA5E9;color:#0369A1">进阶</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Scikit-learn 机器学习实战','sklearn')"><span class="rank">09</span><div class="name">Scikit-learn 机器学习实战<small>预处理 · 训练 · 调参与评估</small></div><span class="level" style="background:#CFFAFE;color:#0E7490">实战</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Prompt 工程进阶','prompt')"><span class="rank">10</span><div class="name">Prompt 工程进阶<small>结构化提示 · 思维链 · 安全</small></div><span class="level" style="background:#CFFAFE;color:#0E7490">实战</span><span class="meta">10 章节</span></div>
+      </div>
+
+      <!-- 云计算运维 -->
+      <div class="category-block" data-cat="云计算运维">
+        <div class="category-block-head">
+          <div class="ci" style="background:#DCFCE7;color:#15803D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+          <h2>云计算与运维</h2>
+          <span class="desc">部署、容器与云服务</span>
+        </div>
+        <div class="tut-row" onclick="openTut('Linux 基础','linux')"><span class="rank">01</span><div class="name">Linux 基础<small>命令 · 权限 · Shell 脚本</small></div><span class="level" style="background:#DCFCE7;color:#15803D">入门</span><span class="meta">15 章节</span></div>
+        <div class="tut-row" onclick="openTut('Docker 容器化','docker')"><span class="rank">02</span><div class="name">Docker 容器化<small>镜像 · 容器 · Compose</small></div><span class="level" style="background:#DCFCE7;color:#15803D">入门</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Kubernetes 入门','k8s')"><span class="rank">03</span><div class="name">Kubernetes 入门<small>Pod · 服务 · 编排</small></div><span class="level" style="background:#DCFCE7;color:#15803D">入门</span><span class="meta">13 章节</span></div>
+        <div class="tut-row" onclick="openTut('Git 版本控制','git')"><span class="rank">04</span><div class="name">Git 版本控制<small>分支 · 合并 · 协作工作流</small></div><span class="level" style="background:#DCFCE7;color:#15803D">入门</span><span class="meta">9 章节</span></div>
+        <div class="tut-row" onclick="openTut('Nginx 反向代理','nginx')"><span class="rank">05</span><div class="name">Nginx 反向代理<small>反向代理 · 负载均衡 · HTTPS</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('CI/CD 持续集成与部署','cicd')"><span class="rank">06</span><div class="name">CI/CD 持续集成与部署<small>流水线 · GitHub Actions · 部署</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('Ansible 自动化运维','ansible')"><span class="rank">07</span><div class="name">Ansible 自动化运维<small>无代理 · Playbook · 角色</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Prometheus 监控体系','prometheus')"><span class="rank">08</span><div class="name">Prometheus 监控体系<small>指标 · PromQL · 告警</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Terraform 基础设施即代码','terraform')"><span class="rank">09</span><div class="name">Terraform 基础设施即代码<small>声明式 · 资源 · 状态工作流</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Serverless 无服务器架构','serverless')"><span class="rank">10</span><div class="name">Serverless 无服务器架构<small>函数即服务 · 触发 · 架构实践</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">10 章节</span></div>
+      </div>
+      <div class="category-block" data-cat="嵌入式开发">
+        <div class="category-block-head">
+          <div class="ci" style="background:#E0E7FF;color:#4F46E5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h6"/></svg></div>
+          <h2>嵌入式开发</h2>
+          <span class="desc">51 单片机与 STM32 硬件开发</span>
+        </div>
+        <div class="tut-row" onclick="openTut('51 单片机入门','stc51')"><span class="rank">01</span><div class="name">51 单片机入门<small>寄存器 · IO 口 · 中断</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('STM32 入门教程','stm32intro')"><span class="rank">02</span><div class="name">STM32 入门教程<small>环境搭建 · GPIO · 串口</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('Arduino 入门','arduino')"><span class="rank">03</span><div class="name">Arduino 入门<small>数字 IO · 传感器 · 原型</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('电路基础','circuit')"><span class="rank">04</span><div class="name">电路基础<small>欧姆定律 · 元件 · 面包板</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('RTOS 实时操作系统','rtos')"><span class="rank">05</span><div class="name">RTOS 实时操作系统<small>任务 · 调度 · 信号量</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('STM32 嵌入式开发','stm32')"><span class="rank">06</span><div class="name">STM32 嵌入式开发<small>GPIO · 定时器 · 串口</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">15 章节</span></div>
+      </div>
+      <div class="category-block" data-cat="计算机基础">
+        <div class="category-block-head">
+          <div class="ci" style="background:#FFEDD5;color:#EA580C"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg></div>
+          <h2>计算机基础</h2>
+          <span class="desc">组成原理、算法、模式与网络</span>
+        </div>
+        <div class="tut-row" onclick="openTut('计算机组成原理','comparch')"><span class="rank">01</span><div class="name">计算机组成原理<small>体系结构 · CPU · 存储</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('数据结构与算法','dsalg')"><span class="rank">02</span><div class="name">数据结构与算法<small>线性结构 · 树图 · 排序</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">15 章节</span></div>
+        <div class="tut-row" onclick="openTut('C语言数据结构与算法','cdsalg')"><span class="rank">03</span><div class="name">C语言数据结构与算法<small>指针 · 链表 · 查找</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">14 章节</span></div>
+        <div class="tut-row" onclick="openTut('正则表达式','regex')"><span class="rank">04</span><div class="name">正则表达式<small>字符类 · 量词 · 分组</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">10 章节</span></div>
+        <div class="tut-row" onclick="openTut('学习 HTTP','http')"><span class="rank">05</span><div class="name">学习 HTTP<small>请求响应 · 状态码 · HTTPS</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">11 章节</span></div>
+        <div class="tut-row" onclick="openTut('学习 TCP/IP','tcpip')"><span class="rank">06</span><div class="name">学习 TCP/IP<small>四层模型 · 握手 · IP</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('网络协议','netproto')"><span class="rank">07</span><div class="name">网络协议<small>分层 · 核心协议 · 抓包</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">12 章节</span></div>
+        <div class="tut-row" onclick="openTut('学习 W3C','w3c')"><span class="rank">08</span><div class="name">学习 W3C<small>标准 · HTML/CSS · 可访问性</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">9 章节</span></div>
+        <div class="tut-row" onclick="openTut('设计模式','design')"><span class="rank">09</span><div class="name">设计模式<small>原则 · 创建型 · 结构型</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">13 章节</span></div>
+        <div class="tut-row" onclick="openTut('Python 设计模式','pydesign')"><span class="rank">10</span><div class="name">Python 设计模式<small>OOP · 单例 · 装饰器</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">12 章节</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 视图：行业指导 ===== -->
+<div class="view" id="view-guide">
+  <div class="container">
+    <div class="page-title">
+      <div class="eyebrow">INDUSTRY GUIDANCE</div>
+      <h1>行业指导</h1>
+      <p>从学习路线到职业规划,从求职准备到行业洞察,帮你在技术这条路上走得更稳、更远。</p>
+    </div>
+    <div class="page-body" style="padding-top:28px">
+
+      <!-- 学习路线 -->
+      <div class="category-block" data-cat="路线1">
+        <div class="category-block-head">
+          <div class="ci" style="background:#CCFBF1;color:#0F766E"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg></div>
+          <h2>前端工程师学习路线</h2>
+          <span class="desc">4 阶段 · 建议 6–10 个月</span>
+        </div>
+        <div class="tut-row" onclick="openGuide('前端路线','g-front')"><span class="rank">01</span><div class="name">阶段一:页面基础<small>HTML 语义化 · CSS 布局与响应式 · 盒模型与 Flex/Grid</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">约 1 个月</span></div>
+        <div class="tut-row" onclick="openGuide('前端路线','g-front')"><span class="rank">02</span><div class="name">阶段二:语言进阶<small>JavaScript 核心 · DOM 与事件 · 异步编程 · ES6+</small></div><span class="level" style="background:#CCFBF1;color:#0F766E">入门</span><span class="meta">约 1.5 个月</span></div>
+        <div class="tut-row" onclick="openGuide('前端路线','g-front')"><span class="rank">03</span><div class="name">阶段三:框架实战<small>Vue 或 React 二选一 · 组件化 · 路由与状态管理</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">约 2 个月</span></div>
+        <div class="tut-row" onclick="openGuide('前端路线','g-front')"><span class="rank">04</span><div class="name">阶段四:工程化<small>打包工具 · 代码规范 · 性能优化 · 项目复盘</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">约 1.5 个月</span></div>
+      </div>
+
+      <div class="category-block" data-cat="路线2">
+        <div class="category-block-head">
+          <div class="ci" style="background:#EDE9FE;color:#6D28D9"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 17v-4M12 17v-7M16 17v-2"/></svg></div>
+          <h2>后端工程师学习路线</h2>
+          <span class="desc">4 阶段 · 建议 8–12 个月</span>
+        </div>
+        <div class="tut-row" onclick="openGuide('后端路线','g-back')"><span class="rank">01</span><div class="name">阶段一:语言与基础<small>选择 Python / Java / Go · 语法 · 数据结构与算法</small></div><span class="level" style="background:#EDE9FE;color:#6D28D9">入门</span><span class="meta">约 1.5 个月</span></div>
+        <div class="tut-row" onclick="openGuide('后端路线','g-back')"><span class="rank">02</span><div class="name">阶段二:数据与网络<small>SQL 与数据库设计 · HTTP 原理 · 操作系统基础</small></div><span class="level" style="background:#EDE9FE;color:#6D28D9">入门</span><span class="meta">约 2 个月</span></div>
+        <div class="tut-row" onclick="openGuide('后端路线','g-back')"><span class="rank">03</span><div class="name">阶段三:框架与接口<small>Web 框架 · RESTful API · 认证与安全</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">进阶</span><span class="meta">约 2 个月</span></div>
+        <div class="tut-row" onclick="openGuide('后端路线','g-back')"><span class="rank">04</span><div class="name">阶段四:架构进阶<small>缓存与消息队列 · 分布式 · 高并发实践</small></div><span class="level" style="background:#DCFCE7;color:#15803D">实战</span><span class="meta">约 2 个月</span></div>
+      </div>
+
+      <!-- 职业规划 -->
+      <div class="category-block" data-cat="规划">
+        <div class="category-block-head">
+          <div class="ci" style="background:#FEF3C7;color:#B45309"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <h2>职业规划指南</h2>
+          <span class="desc">方向选择 · 岗位认知 · 成长进阶</span>
+        </div>
+        <div class="tut-row" onclick="openGuide('岗位全景','g-role')"><span class="rank">01</span><div class="name">技术岗位全景<small>前端 / 后端 / 算法 / 测试 / 运维的职责与技能对比</small></div><span class="level" style="background:#FEF3C7;color:#B45309">认知</span><span class="meta">速览</span></div>
+        <div class="tut-row" onclick="openGuide('技术选型','g-stack')"><span class="rank">02</span><div class="name">如何选择第一门技术栈<small>结合兴趣、就业市场与长期成长空间做判断</small></div><span class="level" style="background:#FEF3C7;color:#B45309">认知</span><span class="meta">决策</span></div>
+        <div class="tut-row" onclick="openGuide('成长路径','g-grow')"><span class="rank">03</span><div class="name">工程师的成长阶梯<small>从初级到资深的技术、协作与影响力进阶</small></div><span class="level" style="background:#FEF3C7;color:#B45309">认知</span><span class="meta">规划</span></div>
+      </div>
+
+      <!-- 求职指南 -->
+      <div class="category-block" data-cat="求职">
+        <div class="category-block-head">
+          <div class="ci" style="background:#FCE7F3;color:#BE185D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div>
+          <h2>求职准备指南</h2>
+          <span class="desc">简历 · 面试 · 项目经验</span>
+        </div>
+        <div class="tut-row" onclick="openGuide('简历撰写','g-resume')"><span class="rank">01</span><div class="name">技术简历撰写要点<small>STAR 法则 · 量化成果 · 常见雷区</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">实操</span><span class="meta">简历</span></div>
+        <div class="tut-row" onclick="openGuide('面试准备','g-interview')"><span class="rank">02</span><div class="name">面试高频题与准备策略<small>基础八股 · 算法题 · 系统设计入门</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">实操</span><span class="meta">面试</span></div>
+        <div class="tut-row" onclick="openGuide('项目实战','g-project')"><span class="rank">03</span><div class="name">做出有说服力的项目<small>选题 · 亮点设计 · 部署与复盘</small></div><span class="level" style="background:#FCE7F3;color:#BE185D">实操</span><span class="meta">项目</span></div>
+      </div>
+
+      <!-- 行业洞察 -->
+      <div class="category-block" data-cat="洞察">
+        <div class="category-block-head">
+          <div class="ci" style="background:#E0F2FE;color:#0369A1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h2>行业洞察</h2>
+          <span class="desc">趋势判断 · 技术选型 · 风险提示</span>
+        </div>
+        <div class="tut-row" onclick="openGuide('趋势解读','g-trend')"><span class="rank">01</span><div class="name">当下技术趋势解读<small>AI 工程化 · 云原生 · 低代码对开发者的影响</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">认知</span><span class="meta">趋势</span></div>
+        <div class="tut-row" onclick="openGuide('学习建议','g-advice')"><span class="rank">02</span><div class="name">给自学者的 5 条建议<small>输入输出并重 · 项目驱动 · 建立知识网络</small></div><span class="level" style="background:#E0F2FE;color:#0369A1">认知</span><span class="meta">方法</span></div>
+      </div>
+      <!-- 关于本站 -->
+      <div class="category-block" data-cat="关于本站">
+        <div class="category-block-head">
+          <div class="ci" style="background:#E2E8F0;color:#475569"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8v.01"/></svg></div>
+          <h2>关于本站</h2>
+          <span class="desc">站点介绍 · 内容说明 · 学习建议</span>
+        </div>
+        <div class="tut-row" onclick="openGuide('关于学码网','g-about')"><span class="rank">01</span><div class="name">关于学码网<small>定位 · 内容方向 · 使用方式</small></div><span class="level" style="background:#E2E8F0;color:#475569">说明</span><span class="meta">介绍</span></div>
+        <div class="tut-row" onclick="openGuide('内容说明','g-notes')"><span class="rank">02</span><div class="name">内容说明<small>示例内容 · 版权 · 免责声明</small></div><span class="level" style="background:#E2E8F0;color:#475569">说明</span><span class="meta">规范</span></div>
+        <div class="tut-row" onclick="openGuide('学习建议','g-tips')"><span class="rank">03</span><div class="name">学习建议<small>上手路径 · 实践方法 · 资料取舍</small></div><span class="level" style="background:#E2E8F0;color:#475569">说明</span><span class="meta">方法</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 视图：分类子页面(动态) ===== -->
+<div class="view" id="view-category">
+  <div class="container">
+    <div class="category-page page-body" id="categoryLayout"></div>
+  </div>
+</div>
+
+<!-- ===== 视图：教程详情(动态) ===== -->
+<div class="view" id="view-article">
+  <div class="container">
+    <div class="content-layout page-body" id="articleLayout"></div>
+  </div>
+</div>
+
+<!-- ===== 视图：指南详情(动态) ===== -->
+<div class="view" id="view-guidearticle">
+  <div class="container">
+    <div class="content-layout page-body" id="guideLayout"></div>
+  </div>
+</div>
+
+<!-- ===== 页脚 ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="logo" href="#/home" data-nav="home">
+        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0D9488"/><path d="M20 22l-8 10 8 10" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 22l8 10-8 10" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M37 20l-10 26" stroke="#FDE68A" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+        <b>学码网</b>
+      </a>
+      <p>一个面向开发者的技术学习门户,用系统化的分类与路线,帮你把一门技术真正学懂、学扎实。</p>
+    </div>
+    <div>
+      <h4>技术分类</h4>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','前端开发')">前端开发</a>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','后端开发')">后端开发</a>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','数据库')">数据库</a>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','人工智能')">人工智能</a>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','云计算运维')">云计算与运维</a>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','移动开发')">移动开发</a>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','嵌入式开发')">嵌入式开发</a>
+      <a href="#/tech" data-nav="tech" onclick="go('tech','计算机基础')">计算机基础</a>
+    </div>
+    <div>
+      <h4>行业指导</h4>
+      <a href="#/guide" data-nav="guide" onclick="go('guide','路线1')">前端学习路线</a>
+      <a href="#/guide" data-nav="guide" onclick="go('guide','路线2')">后端学习路线</a>
+      <a href="#/guide" data-nav="guide" onclick="go('guide','规划')">职业规划</a>
+      <a href="#/guide" data-nav="guide" onclick="go('guide','求职')">求职准备</a>
+      <a href="#/guide" data-nav="guide" onclick="go('guide','洞察')">行业洞察</a>
+    </div>
+    <div>
+      <h4>关于本站</h4>
+      <a href="#/guidearticle/g-about">关于学码网</a>
+      <a href="#/guidearticle/g-notes">内容说明</a>
+      <a href="#/guidearticle/g-tips">学习建议</a>
+      <a href="#/home" data-nav="home">回到首页</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 学码网 · 演示站 · 示例内容仅供参考</span>
+    <span>为开发者打造的中文技术学习导航</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   学码网 —— 交互逻辑
+   哈希路由 + 全站搜索 + 移动端菜单 + 教程/指南内容渲染
+   ============================================================ */
+
+/* ---------- 教程内容数据 ---------- */
+const TUTORIALS = {
+  html:{title:'HTML 入门教程',cat:'前端开发',level:'入门',chapters:12,summary:'HTML 是网页的骨架语言,本节带你从零搭建第一个页面。',
+    sections:[
+      {h:'HTML 是什么',body:'HTML(HyperText Markup Language)超文本标记语言,是构成网页的基础。它通过标签描述内容的结构:标题、段落、图片、链接等。浏览器读取 HTML 后渲染成可视页面。HTML 不是编程语言,而是一种标记语言——它负责「内容是什么」,CSS 负责「长什么样」,JavaScript 负责「怎么动」。'},
+      {h:'基本文档结构',body:'一个 HTML 文档以 `<!DOCTYPE html>` 声明开始,根元素是 `<html>`,`<head>` 存放元信息(标题、字符集、样式),`<body>` 存放页面可见内容。',
+       pre:'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="UTF-8">\n    <title>我的第一个页面</title>\n  </head>\n  <body>\n    <h1>你好,世界</h1>\n    <p>这是我的网页。</p>\n  </body>\n</html>'},
+      {h:'常用标签',body:'按用途可将常用标签分为几类:',
+       list:['文本:标题 h1–h6、段落 p、强调 strong/em、换行 br','结构:div(块级容器)、span(行内容器)、语义化标签 header/footer/main/section/article','链接与媒体:a 链接、img 图片、audio/video 音视频','列表:ul(无序)、ol(有序)、li(列表项)','表格:table、tr、th、td']},
+      {h:'表单与输入',body:'表单用 `<form>` 包裹,`<input>` 负责各种输入,配合 `name` 属性提交数据。常用类型:text、password、email、number、checkbox、radio、select 下拉框、textarea 多行文本、button 按钮。',
+       pre:'<form>\n  <label>用户名 <input type="text" name="user"></label>\n  <label>邮箱 <input type="email" name="mail"></label>\n  <button type="submit">提交</button>\n</form>'},
+      {h:'语义化与可访问性',body:'尽量使用语义化标签而非纯 div,有助于 SEO 和屏幕阅读器理解页面结构。同时为图片添加 alt 文本、为控件添加 label,提升可访问性。'
+      +'<div class="tip">小提示:语义化标签不会改变页面外观,但会让代码更有意义、更好维护。</div>'}
+    ]},
+  css:{title:'CSS 入门教程',cat:'前端开发',level:'入门',chapters:14,summary:'CSS 负责网页的样式与布局,让内容变得美观有序。',
+    sections:[
+      {h:'CSS 是什么',body:'CSS(Cascading Style Sheets)层叠样式表,用于控制 HTML 的呈现。选择器选中元素,声明块定义样式,层叠规则决定优先级。三种引入方式:行内样式、内嵌 `<style>`、外部样式表。'},
+      {h:'选择器与优先级',body:'常用选择器:标签选择器、类选择器 `.class`、ID 选择器 `#id`、后代选择器、属性选择器、伪类 `:hover`。优先级由高到低:内联样式 > ID > 类/属性/伪类 > 标签。',
+       pre:'.btn {\n  color: #fff;\n  background: #0d9488;\n  padding: 10px 20px;\n  border-radius: 8px;\n}\n.btn:hover {\n  background: #0f766e;\n}'},
+      {h:'盒模型',body:'每个元素都是一个盒子,由内容、内边距 padding、边框 border、外边距 margin 组成。用 `box-sizing: border-box` 可让宽高包含 padding 与 border,避免尺寸溢出。',
+       list:['content:内容区','padding:内边距,内容与边框的间距','border:边框','margin:外边距,盒子与盒子的间距']},
+      {h:'布局:Flex 与 Grid',body:'Flexbox 适合一维布局(行或列),Grid 适合二维布局(行和列同时控制)。二者是现代布局的主力。',
+       pre:'.row {\n  display: flex;\n  gap: 12px;\n}\n.row > .item { flex: 1; }\n\n.grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 16px;\n}'},
+      {h:'响应式与动画',body:'用 `@media` 查询在不同屏幕宽度下应用不同样式;用 `transition` 与 `@keyframes` 制作平滑动画。移动优先是当前主流写法。',
+       pre:'@media (max-width: 640px) {\n  .grid { grid-template-columns: 1fr; }\n}\n\n@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}'}
+    ]},
+  js:{title:'JavaScript 教程',cat:'前端开发',level:'入门',chapters:18,summary:'JavaScript 让网页动起来,是前端开发的核心语言。',
+    sections:[
+      {h:'语言基础',body:'JavaScript 是网页的交互语言。变量用 let/const 声明,数据类型包括数字、字符串、布尔、数组、对象、null、undefined。函数是一等公民,支持箭头函数。'},
+      {h:'操作 DOM',body:'DOM(Document Object Model)是 HTML 的编程接口。通过 document.querySelector 选中元素,修改其内容、样式、属性,实现交互。',
+       pre:"const btn = document.querySelector('#btn');\nbtn.addEventListener('click', () => {\n  document.body.style.background = '#0d9488';\n});"},
+      {h:'事件与异步',body:'事件是用户交互的入口,常见事件有 click、input、submit。异步通过 Promise 与 async/await 处理,配合 fetch 请求接口。',
+       pre:"async function loadData() {\n  const res = await fetch('/api/data');\n  const data = await res.json();\n  console.log(data);\n}\nloadData();"},
+      {h:'ES6+ 新特性',body:'模板字符串、解构赋值、展开运算符、class 语法、模块 import/export,极大提升了开发效率与代码可读性。'
+      +'<div class="tip">建议先掌握基础语法,再逐步了解 DOM 与异步,最后学习框架。</div>'}
+    ]},
+  ts:{title:'TypeScript 入门',cat:'前端开发',level:'进阶',chapters:10,summary:'TypeScript 是 JavaScript 的超集,为 JS 增加静态类型,提升大型项目可维护性。',
+    sections:[
+      {h:'为什么用 TypeScript',body:'TypeScript 在编译期检查类型错误,让代码更健壮、可读、易重构。它与 JS 完全兼容,学习成本低,是当前前端工程化的主流选择。'},
+      {h:'类型系统',body:'基础类型、接口 interface、联合类型、泛型 generics,为数据建模提供精确约束。',
+       pre:'interface User {\n  id: number;\n  name: string;\n  email?: string;\n}\n\nfunction greet(u: User): string {\n  return `你好, ${u.name}`;\n}'},
+      {h:'接口与泛型',body:'接口描述对象形状,泛型让函数与组件可复用多种类型,二者是 TS 工程能力的核心。'}
+    ]},
+  vue:{title:'Vue.js 实战',cat:'前端开发',level:'进阶',chapters:13,summary:'Vue 是渐进式前端框架,以响应式数据驱动视图,上手简单。',
+    sections:[
+      {h:'响应式原理',body:'Vue 通过数据劫持与依赖收集实现响应式:当 data 变化时,视图自动更新。无需手动操作 DOM。',
+       pre:"const { createApp, ref } = Vue;\ncreateApp({\n  setup() {\n    const count = ref(0);\n    return { count };\n  }\n}).mount('#app');"},
+      {h:'组件化开发',body:'组件是 Vue 的核心抽象。props 接收父组件数据,emit 向父组件发事件,插槽 slot 实现内容分发。'},
+      {h:'路由与状态',body:'Vue Router 管理页面路由,Vuex / Pinia 管理共享状态,组合起来构建复杂单页应用。'}
+    ]},
+  react:{title:'React 实战',cat:'前端开发',level:'进阶',chapters:13,summary:'React 以组件与声明式 UI 著称,配合 Hooks 进行状态管理。',
+    sections:[
+      {h:'组件与 JSX',body:'React 用函数组件 + Hooks 构建 UI。JSX 让 HTML 与逻辑写在一起,通过 state 与 props 驱动渲染。',
+       pre:'function Counter() {\n  const [count, setCount] = React.useState(0);\n  return <button onClick={() => setCount(c => c+1)}>\n    {count}\n  </button>;\n}'},
+      {h:'Hooks',body:'useState 管理状态,useEffect 处理副作用(数据请求、订阅),useRef 引用 DOM。自定义 Hooks 封装复用逻辑。'},
+      {h:'生态',body:'React Router 管理路由,状态管理可用 Redux / Zustand,配合 Next.js 可做服务端渲染。'}
+    ]},
+
+  python:{title:'Python 入门教程',cat:'后端开发',level:'入门',chapters:16,summary:'Python 语法简洁,应用广泛,是入门编程与自动化处理的首选语言。',
+    sections:[
+      {h:'为什么学 Python',body:'Python 语法接近自然语言,上手快,生态庞大:Web(Flask/Django)、数据分析、AI、自动化脚本无所不能,被称为「胶水语言」。'},
+      {h:'基础语法',body:'变量、条件判断、循环、函数是核心。Python 用缩进表示代码块,风格清晰。',
+       pre:'def greet(name):\n    return f"你好, {name}"\n\nfor i in range(3):\n    print(greet("同学"))'},
+      {h:'数据结构',body:'列表 list、元组 tuple、字典 dict、集合 set 覆盖绝大多数场景。列表推导式让数据处理更简洁。',
+       pre:'nums = [1, 2, 3, 4]\n# 列表推导式:取偶数并平方\nsquares = [n*n for n in nums if n % 2 == 0]\nprint(squares)  # [4, 16]'},
+      {h:'文件与模块',body:'open() 读写文件,import 导入模块。学会模块组织代码,是工程化的第一步。'
+      +'<div class="tip">练习建议:写一个批量重命名文件的脚本,或抓取网页数据的脚本。</div>'}
+    ]},
+  java:{title:'Java 入门教程',cat:'后端开发',level:'入门',chapters:15,summary:'Java 是大型企业级应用的主流语言,面向对象思想是其精髓。',
+    sections:[
+      {h:'Java 概述',body:'Java 以 JVM 实现跨平台,强类型、面向对象,广泛用于企业后端、Android、大数据生态。'},
+      {h:'面向对象',body:'类 class 与对象、封装、继承、多态是 Java 的核心。理解面向对象,是写好 Java 的前提。',
+       pre:'public class Dog extends Animal {\n  public void speak() {\n    System.out.println("汪汪");\n  }\n}'},
+      {h:'集合与异常',body:'List/Set/Map 是日常主力集合;try-catch 处理异常,保证程序健壮。'}
+    ]},
+  go:{title:'Go 语言入门',cat:'后端开发',level:'入门',chapters:12,summary:'Go 以简洁、高性能、原生并发著称,是云原生时代的明星语言。',
+    sections:[
+      {h:'Go 特点',body:'编译型语言,语法简洁,内置 goroutine 与 channel 让并发编程简单高效,广泛用于后端服务与容器生态(Docker、K8s 均用 Go)。'},
+      {h:'并发模型',body:'goroutine 是轻量线程,channel 用于协程间通信,遵循「通过通信共享内存」的哲学。',
+       pre:'func main() {\n  ch := make(chan string)\n  go func() { ch <- "hi" }()\n  fmt.Println(<-ch)\n}'},
+      {h:'接口与包',body:'Go 通过接口实现多态,包管理让代码清晰复用。'}
+    ]},
+  php:{title:'PHP 入门教程',cat:'后端开发',level:'入门',chapters:14,summary:'PHP 是服务端脚本语言,是 Web 开发入门的经典选择之一。',
+    sections:[
+      {h:'PHP 是什么',body:'PHP 直接嵌入 HTML,擅长 Web 服务端开发。配合 MySQL 可快速构建动态网站。'},
+      {h:'基础语法',body:'变量以 $ 开头,echo 输出。支持面向对象。',
+       pre:'<?php\n$name = "同学";\necho "你好, " . $name;\n?>'},
+      {h:'与 Web 集成',body:'通过表单 GET/POST 接收数据,操作数据库,返回动态页面。'}
+    ]},
+  node:{title:'Node.js 后端开发',cat:'后端开发',level:'实战',chapters:12,summary:'Node.js 让 JavaScript 运行在服务端,事件驱动、非阻塞 I/O。',
+    sections:[
+      {h:'Node.js 特性',body:'基于 V8 引擎,事件循环实现高并发。npm 生态庞大,是构建 API 服务的轻量选择。'},
+      {h:'Express 框架',body:'Express 是 Node 最流行的 Web 框架,中间件机制清晰,快速搭建 RESTful API。',
+       pre:"const express = require('express');\nconst app = express();\napp.get('/hello', (req, res) => {\n  res.json({ msg: 'Hello' });\n});\napp.listen(3000);"},
+      {h:'模块与异步',body:'CommonJS 模块化,async/await 处理异步流程,配合数据库驱动做全栈开发。'}
+    ]},
+  spring:{title:'Spring Boot 实战',cat:'后端开发',level:'实战',chapters:11,summary:'Spring Boot 让 Java 后端开发更简单,开箱即用,企业级首选。',
+    sections:[
+      {h:'Spring Boot 理念',body:'约定优于配置,自动装配,内嵌服务器,一个启动类即可运行 Web 应用。'},
+      {h:'核心组件',body:'控制器 Controller、依赖注入、数据访问(Spring Data JPA/MyBatis)、配置管理。',
+       pre:'@RestController\npublic class HelloController {\n  @GetMapping("/hello")\n  public String hi() {\n    return "Hello";\n  }\n}'},
+      {h:'数据访问',body:'通过 Repository 接口操作数据库,事务管理保证数据一致性。'}
+    ]},
+
+  mysql:{title:'MySQL 入门教程',cat:'数据库',level:'入门',chapters:14,summary:'MySQL 是最流行的开源关系型数据库,SQL 学习从这里开始。',
+    sections:[
+      {h:'关系型数据库',body:'数据以表 table 组织,表由行与列构成,通过主键唯一标识,外键建立表间关联。SQL 是查询与操作的标准语言。'},
+      {h:'建库建表',body:'CREATE DATABASE 建库,CREATE TABLE 建表并定义字段类型、约束。',
+       pre:'CREATE TABLE users (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  name VARCHAR(50) NOT NULL,\n  email VARCHAR(100) UNIQUE\n);'},
+      {h:'增删改查 CRUD',body:'INSERT 插入,SELECT 查询,UPDATE 更新,DELETE 删除,是日常操作的四件套。',
+       pre:'SELECT name, email FROM users WHERE id > 10 ORDER BY id DESC LIMIT 5;'},
+      {h:'索引与事务',body:'索引加速查询(以空间换时间);事务保证一组操作要么全部成功要么全部回滚,满足 ACID。'
+      +'<div class="tip">练习建议:给表加索引前后用 EXPLAIN 对比查询计划,理解索引威力。</div>'}
+    ]},
+  redis:{title:'Redis 入门教程',cat:'数据库',level:'入门',chapters:11,summary:'Redis 是高性能内存数据库,常用于缓存、队列与计数。',
+    sections:[
+      {h:'Redis 定位',body:'基于内存的键值存储,读写极快。支持字符串、列表、哈希、集合、有序集合等数据结构。'},
+      {h:'常用数据结构',body:'SET/GET 字符串,LPUSH 列表,SADD 集合,ZADD 有序集合,HSET 哈希。',
+       pre:'SET user:1 "alice"\nGET user:1\nLPUSH queue "task"\nZADD score 90 "player1"'},
+      {h:'缓存与持久化',body:'作为缓存层减轻数据库压力;RDB/AOF 两种持久化方式保证重启后数据不丢。'}
+    ]},
+  mongo:{title:'MongoDB 入门',cat:'数据库',level:'入门',chapters:9,summary:'MongoDB 是文档型 NoSQL 数据库,以 JSON 形式存储,灵活易扩展。',
+    sections:[
+      {h:'文档模型',body:'数据以 BSON 文档(类 JSON)存储,无需预定义表结构,字段灵活。适合快速迭代与海量数据。'},
+      {h:'聚合与查询',body:'find 查询,aggregate 聚合管道处理复杂统计。',
+       pre:"db.users.find({ age: { $gt: 18 } })\ndb.orders.aggregate([\n  { $group: { _id: \"$status\", total: { $sum: \"$amount\" } } }\n])"}
+    ]},
+  pg:{title:'PostgreSQL 进阶',cat:'数据库',level:'进阶',chapters:10,summary:'PostgreSQL 功能强大,以丰富的数据类型与扩展著称。',
+    sections:[
+      {h:'为什么选 PostgreSQL',body:'支持复杂查询、JSONB、全文检索、扩展插件,是功能最全面的开源数据库。'},
+      {h:'窗口函数',body:'窗口函数在结果集内做计算,适合排名、累计、移动平均等分析场景。',
+       pre:'SELECT name, salary,\n  RANK() OVER (ORDER BY salary DESC) AS rnk\nFROM employees;'}
+    ]},
+
+  android:{title:'Android 入门',cat:'移动开发',level:'入门',chapters:14,summary:'Android 是全球用户量最大的移动操作系统,Kotlin 是首选语言。',
+    sections:[
+      {h:'Android 架构',body:'应用由 Activity、Service、BroadcastReceiver、ContentProvider 四大组件构成。UI 用 XML 或 Jetpack Compose 声明。'},
+      {h:'Jetpack 组件',body:'ViewModel 管理界面数据,Lifecycle 感知生命周期,Room 做本地数据库,全面提升开发体验。',
+       pre:'class MainViewModel : ViewModel() {\n  val count = MutableLiveData(0)\n}'},
+      {h:'界面与数据',body:'RecyclerView 渲染长列表,配合数据绑定与协程处理异步任务。'}
+    ]},
+  ios:{title:'iOS 入门',cat:'移动开发',level:'入门',chapters:13,summary:'iOS 使用 Swift 语言,SwiftUI 是新一代声明式 UI 框架。',
+    sections:[
+      {h:'Swift 语言',body:'Swift 安全、现代、高性能,是 Apple 平台的官方语言。'},
+      {h:'SwiftUI',body:'声明式 UI:描述视图状态,框架自动管理刷新。与 UIKit 相比更简洁。',
+       pre:'struct ContentView: View {\n  var body: some View {\n    Text("Hello, iOS")\n      .font(.largeTitle)\n  }\n}'}
+    ]},
+  flutter:{title:'Flutter 跨端开发',cat:'移动开发',level:'入门',chapters:12,summary:'Flutter 用一套代码同时构建 iOS 与 Android 应用,性能接近原生。',
+    sections:[
+      {h:'Flutter 特性',body:'使用 Dart 语言,基于自绘引擎渲染,UI 一致性与性能优秀,一套代码跨平台。'},
+      {h:'Widget 体系',body:'Flutter 一切皆 Widget,StatelessWidget 与 StatefulWidget 是两大基础。',
+       pre:'class Counter extends StatefulWidget {\n  @override\n  State<Counter> createState() => _CounterState();\n}'},
+      {h:'状态管理',body:'Provider、Riverpod 等方案管理共享状态,构建复杂界面。'}
+    ]},
+  mp:{title:'微信小程序开发',cat:'移动开发',level:'实战',chapters:10,summary:'微信小程序是微信生态内的轻量应用,基于微信小程序框架。',
+    sections:[
+      {h:'小程序框架',body:'WXML 描述结构,WXSS 描述样式,JS 处理逻辑。页面由这四个文件组成,天然适配微信生态。'},
+      {h:'组件与 API',body:'内置丰富组件,微信 API 提供登录、支付、分享、云开发等能力。',
+       pre:'Page({\n  data: { count: 0 },\n  add() { this.setData({ count: this.data.count + 1 }); }\n})'}
+    ]},
+
+  ml:{title:'机器学习基础',cat:'人工智能',level:'入门',chapters:13,summary:'机器学习让计算机从数据中学习规律,是现代 AI 的基石。',
+    sections:[
+      {h:'机器学习是什么',body:'通过数据与算法让模型自动学习规律并做出预测。三大类型:监督学习(有标签)、无监督学习(无标签)、强化学习(奖励驱动)。'},
+      {h:'核心流程',body:'数据准备 → 特征工程 → 选择模型 → 训练 → 评估 → 调优。数据质量往往比模型更重要。'},
+      {h:'常用算法',body:'线性回归、逻辑回归、决策树、随机森林、SVM、K-means 聚类。理解它们适用的场景是关键。',
+       pre:'from sklearn.linear_model import LogisticRegression\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train)\nacc = model.score(X_test, y_test)'}
+    ]},
+  dl:{title:'深度学习入门',cat:'人工智能',level:'入门',chapters:12,summary:'深度学习用多层神经网络自动提取特征,成就了图像、语音、NLP 的突破。',
+    sections:[
+      {h:'神经网络',body:'由输入层、隐藏层、输出层构成,通过激活函数引入非线性,反向传播更新权重。'},
+      {h:'CNN 与序列模型',body:'CNN 擅长图像,RNN/Transformer 擅长序列与文本。',
+       pre:'import torch.nn as nn\nclass Net(nn.Module):\n  def __init__(self):\n    super().__init__()\n    self.fc = nn.Linear(28*28, 10)\n  def forward(self, x):\n    return self.fc(x)'}
+    ]},
+  pytorch:{title:'PyTorch 实战',cat:'人工智能',level:'入门',chapters:12,summary:'PyTorch 是当前最流行的深度学习框架,动态图机制灵活。',
+    sections:[
+      {h:'张量与自动求导',body:'Tensor 是核心数据结构,autograd 自动计算梯度,让反向传播变得简单。',
+       pre:'import torch\nx = torch.randn(3, requires_grad=True)\ny = (x * x).sum()\ny.backward()\nprint(x.grad)'},
+      {h:'训练流程',body:'定义模型 → 定义损失与优化器 → 前向传播 → 反向传播 → 更新参数,循环迭代。'}
+    ]},
+  llm:{title:'大模型应用开发',cat:'人工智能',level:'实战',chapters:10,summary:'面向大语言模型(LLM)的应用开发,是当下 AI 工程化最热的方向。',
+    sections:[
+      {h:'LLM 应用架构',body:'以 LLM 为推理核心,通过 Prompt 设计、检索增强(RAG)、工具调用(Agent)构建智能应用。'},
+      {h:'Prompt 工程',body:'清晰、具体的指令能显著提升输出质量。角色设定、示例(few-shot)、结构化输出是常用技巧。',
+       pre:'prompt = """你是资深Python讲师。请用通俗语言解释\n什么是列表推导式,并给出一个代码示例。"""'},
+      {h:'RAG 与 Agent',body:'RAG 将外部知识检索注入上下文,解决幻觉与知识更新问题;Agent 让模型调用工具完成复杂任务。'
+      +'<div class="tip">建议:先上手调用 API 做一个问答助手,再逐步加入记忆与工具调用。</div>'}
+    ]},
+
+  linux:{title:'Linux 基础',cat:'云计算运维',level:'入门',chapters:15,summary:'Linux 是服务器与云计算的基石,掌握命令行是运维第一步。',
+    sections:[
+      {h:'文件与目录',body:'一切皆文件。常用命令:ls 列出、cd 切换、mkdir 建目录、rm 删除、cp 复制、mv 移动、cat 查看。',
+       pre:'ls -la\ncd /var/log\nmkdir -p ~/projects\ncp app.log ~/backup.log'},
+      {h:'权限管理',body:'文件权限分读 r、写 w、执行 x,属主/属组/其他三组。chmod 修改权限,chown 修改属主。',
+       pre:'chmod 755 script.sh\nchown alice:dev config.ini'},
+      {h:'Shell 脚本',body:'Shell 脚本自动化运维任务,变量、循环、条件判断是基础。',
+       pre:'#!/bin/bash\nfor f in *.log; do\n  echo "压缩 $f"\n  gzip "$f"\ndone'}
+    ]},
+  docker:{title:'Docker 容器化',cat:'云计算运维',level:'入门',chapters:11,summary:'Docker 用容器打包应用与依赖,实现「一次构建,处处运行」。',
+    sections:[
+      {h:'容器与镜像',body:'镜像(Image)是只读模板,容器(Container)是运行实例。Dockerfile 定义构建过程。',
+       pre:'FROM python:3.11\nWORKDIR /app\nCOPY . .\nRUN pip install -r requirements.txt\nCMD ["python", "app.py"]'},
+      {h:'Compose 编排',body:'docker-compose.yml 用一条命令启动多个容器(如 Web + 数据库),本地开发必备。',
+       pre:'services:\n  web:\n    build: .\n    ports: ["8000:8000"]\n  db:\n    image: mysql:8'}
+    ]},
+  k8s:{title:'Kubernetes 入门',cat:'云计算运维',level:'入门',chapters:13,summary:'Kubernetes(K8s)是容器编排的事实标准,管理大规模容器部署。',
+    sections:[
+      {h:'核心概念',body:'Pod 是最小部署单元,Deployment 管理副本与滚动更新,Service 提供稳定访问入口。',
+       pre:'apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: web\nspec:\n  replicas: 3\n  selector:\n    matchLabels: { app: web }'},
+      {h:'调度与伸缩',body:'K8s 自动调度、故障自愈、支持水平伸缩(HPA),是云原生基础设施的核心。'}
+    ]},
+  git:{title:'Git 版本控制',cat:'云计算运维',level:'入门',chapters:9,summary:'Git 是分布式版本控制系统,是每个开发者的必修技能。',
+    sections:[
+      {h:'Git 基础',body:'工作区 → 暂存区 → 本地仓库 → 远程仓库。commit 保存快照,branch 分叉开发。',
+       pre:'git init\ngit add .\ngit commit -m "first commit"\ngit push origin main'},
+      {h:'分支与协作',body:'feature 分支开发,merge 或 rebase 合并,解决冲突是协作常态。Pull Request 是主流代码评审流程。'},
+      {h:'常用工作流',body:'Git Flow、GitHub Flow 等团队协作模型,各有适用场景。'}
+    ]},
+  sass:{title:'Sass/SCSS 样式预处理',cat:'前端开发',level:'进阶',chapters:10,summary:'Sass 让 CSS 具备变量、嵌套与复用能力,是大型样式工程的标配。',
+    sections:[
+      {h:'为什么要用 Sass',body:'原生 CSS 缺少变量与逻辑能力,样式一多就难以维护。Sass 提供变量、嵌套、混合、继承与函数,编译后仍是标准 CSS,学习曲线平缓。'},
+      {h:'变量与嵌套',body:'用 `$` 定义变量,复用主题色与间距;嵌套语法让父子选择器更直观,配合 `&` 引用父选择器。',
+       pre:'$primary: #0d9488;\n\n.btn {\n  color: #fff;\n  background: $primary;\n  &:hover { background: darken($primary, 8%); }\n}'},
+      {h:'混合与继承',body:'`@mixin` 封装复用样式块,`@extend` 实现样式继承,显著减少重复代码。',
+       pre:'@mixin flex-center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.card { @include flex-center; }'},
+      {h:'工程实践',body:'将样式拆分为变量、基础、组件、页面等 partial 文件,用 `@use` 引入,配合自动编译接入构建流程。'}
+    ]},
+  webpack:{title:'Webpack 打包工具',cat:'前端开发',level:'进阶',chapters:12,summary:'Webpack 是现代前端工程化的核心打包器,管理模块依赖与资源。',
+    sections:[
+      {h:'核心概念',body:'Webpack 把项目所有模块(JS、CSS、图片)视为依赖图,通过 entry 入口、output 输出、module 规则、plugin 插件完成打包与转换。'},
+      {h:'Loader 与 Plugin',body:'Loader 负责转换模块内容(如 babel-loader 转 ES6、style-loader 处理 CSS);Plugin 负责更广泛的任务(如压缩、注入 HTML)。',
+       pre:'module.exports = {\n  entry: "./src/index.js",\n  output: { filename: "bundle.js" },\n  module: {\n    rules: [\n      { test: /\\.js$/, use: "babel-loader" },\n      { test: /\\.css$/, use: ["style-loader", "css-loader"] }\n    ]\n  }\n};'},
+      {h:'常用插件',body:'HtmlWebpackPlugin 自动生成 HTML 并注入打包产物,mini-css-extract-plugin 抽离样式,terser 做 JS 压缩。'},
+      {h:'性能优化',body:'代码分割(code splitting)、Tree Shaking 去除无用代码、缓存与长缓存策略,是优化打包体积与加载速度的关键。'}
+    ]},
+
+  flask:{title:'Flask 快速开发',cat:'后端开发',level:'实战',chapters:10,summary:'Flask 是轻量 Python Web 框架,小而灵活,适合快速搭建服务。',
+    sections:[
+      {h:'Flask 定位',body:'Flask 核心极简,路由、模板、请求处理开箱即用,扩展按需加载。相比 Django 更自由,适合小型服务与 API。'},
+      {h:'路由与视图',body:'用 `@app.route` 装饰器注册路由,视图函数返回响应。支持路径参数与不同的 HTTP 方法。',
+       pre:'from flask import Flask, jsonify, request\n\napp = Flask(__name__)\n\n@app.route("/api/items", methods=["GET"])\ndef list_items():\n    return jsonify({"items": [1, 2, 3]})\n\nif __name__ == "__main__":\n    app.run(debug=True)'},
+      {h:'模板与表单',body:'配合 Jinja2 模板渲染 HTML,处理表单提交与校验,构建传统 Web 应用。'},
+      {h:'数据库集成',body:'Flask-SQLAlchemy 提供 ORM,简化数据库操作;配合迁移工具管理表结构演进。'}
+    ]},
+  micro:{title:'微服务架构入门',cat:'后端开发',level:'实战',chapters:11,summary:'微服务将单体拆分为多个独立服务,各自部署、各自演进。',
+    sections:[
+      {h:'单体 vs 微服务',body:'单体应用把全部功能打在一个包里,简单但难扩展;微服务按业务边界拆分,独立开发部署,技术栈可异构,但引入分布式复杂度。'},
+      {h:'服务拆分原则',body:'按业务领域与变化频率拆分,优先「高内聚、低耦合」。拆分过细会带来沟通与运维成本,需权衡。',
+       list:['按业务领域:订单、用户、支付各自独立','按数据边界:每个服务拥有自己的数据库','按团队结构:一个团队负责一个服务']},
+      {h:'服务通信',body:'同步用 REST/gRPC,异步用消息队列(Kafka/RabbitMQ),事件驱动解耦服务。'},
+      {h:'服务治理',body:'服务注册发现、配置中心、网关、熔断限流与链路追踪,是微服务落地必备的配套能力。'}
+    ]},
+
+  sqlite:{title:'SQLite 轻量数据库',cat:'数据库',level:'入门',chapters:8,summary:'SQLite 是嵌入式数据库,无需服务器,单文件存储,适合本地应用。',
+    sections:[
+      {h:'SQLite 特点',body:'一个文件就是一个数据库,零配置、可嵌入,广泛用于移动应用、桌面工具与原型开发。支持标准 SQL 的大部分能力。'},
+      {h:'基础 SQL',body:'与 MySQL 类似,建表、增删改查一脉相承。',
+       pre:'CREATE TABLE notes (id INTEGER PRIMARY KEY, body TEXT);\nINSERT INTO notes (body) VALUES ("hello");\nSELECT * FROM notes;'},
+      {h:'Python 集成',body:'Python 内置 sqlite3 模块,无需安装驱动,即可读写 SQLite 数据库。',
+       pre:'import sqlite3\nconn = sqlite3.connect("app.db")\nc = conn.cursor()\nc.execute("SELECT * FROM notes")\nprint(c.fetchall())'}
+    ]},
+  es:{title:'Elasticsearch 搜索',cat:'数据库',level:'进阶',chapters:11,summary:'Elasticsearch 是分布式搜索引擎,基于倒排索引实现全文检索与分析。',
+    sections:[
+      {h:'倒排索引',body:'为支撑海量文本的快速检索,ES 将文档切词后建立「词 → 文档」的倒排索引,查询时直接定位,而非逐个匹配。'},
+      {h:'查询 DSL',body:'通过 JSON 风格的 DSL 编写查询,支持全文检索、过滤、聚合与排序。',
+       pre:'{\n  "query": {\n    "match": { "title": "深度学习" }\n  },\n  "aggs": {\n    "by_cat": { "terms": { "field": "category" } }\n  }\n}'},
+      {h:'索引与分词',body:'索引定义字段类型与分析器(分词器),分词直接影响检索效果,中英文场景需选择合适的分词器。'}
+    ]},
+
+  rn:{title:'React Native 跨端开发',cat:'移动开发',level:'进阶',chapters:11,summary:'React Native 用 JS/React 构建原生移动应用,一套代码双端运行。',
+    sections:[
+      {h:'RN 原理',body:'RN 用 React 组件描述 UI,通过桥接调用原生组件渲染,兼顾开发效率与原生性能。',
+       pre:'import { View, Text, Button } from "react-native";\n\nexport default function App() {\n  return (\n    <View>\n      <Text>Hello RN</Text>\n      <Button title="点我" onPress={() => alert("hi")} />\n    </View>\n  );\n}'},
+      {h:'导航与状态',body:'React Navigation 管理页面跳转,状态管理用 Context 或 Redux/Zustand,构建完整应用。'},
+      {h:'调试与发布',body:'使用 Metro 打包,热更新提升开发体验;发布前做性能与包体积优化,双端各自上架。'}
+    ]},
+  harmony:{title:'鸿蒙开发入门',cat:'移动开发',level:'入门',chapters:10,summary:'鸿蒙(HarmonyOS)是华为的全场景操作系统,支持多设备协同。',
+    sections:[
+      {h:'鸿蒙与 ArkTS',body:'鸿蒙应用使用 ArkTS(基于 TypeScript)与 ArkUI 声明式 UI 开发,一套代码可适配手机、平板、车机等多设备。'},
+      {h:'页面与组件',body:'通过 `@Entry` 标记入口组件,`@State` 驱动界面刷新,构建声明式页面。',
+       pre:'@Entry\n@Component\nstruct Index {\n  @State count: number = 0\n  build() {\n    Column() {\n      Text(`点击: ${this.count}`)\n      Button("加一").onClick(() => { this.count++ })\n    }\n  }\n}'},
+      {h:'端云一体化',body:'鸿蒙原生支持云开发,数据、认证、存储等能力开箱即用,降低全栈开发成本。'}
+    ]},
+
+  tf:{title:'TensorFlow 基础',cat:'人工智能',level:'入门',chapters:11,summary:'TensorFlow 是 Google 的深度学习框架,配套 Keras 高层 API 上手友好。',
+    sections:[
+      {h:'TensorFlow 概览',body:'以张量(Tensor)为核心数据单元,通过计算图/即时执行完成模型定义与训练。Keras 作为高层 API,几行代码即可搭建模型。'},
+      {h:'Keras 高层 API',body:'用 Sequential 或函数式 API 定义网络,compile 配置优化器与损失,fit 完成训练。',
+       pre:'from tensorflow import keras\n\nmodel = keras.Sequential([\n  keras.layers.Dense(64, activation="relu"),\n  keras.layers.Dense(10, activation="softmax")\n])\nmodel.compile(optimizer="adam", loss="categorical_crossentropy")\nmodel.fit(x_train, y_train, epochs=5)'},
+      {h:'模型保存与部署',body:'用 save/load 保存模型,可导出为 SavedModel 或 TFLite 部署到移动端与服务器。'}
+    ]},
+  nlp:{title:'自然语言处理入门',cat:'人工智能',level:'入门',chapters:12,summary:'NLP 让机器理解与生成语言,是聊天机器人、翻译、搜索的基石。',
+    sections:[
+      {h:'NLP 是什么',body:'自然语言处理涵盖文本分类、情感分析、机器翻译、问答等任务。核心难点在于语言的歧义与上下文依赖。'},
+      {h:'文本表示',body:'文本需转为模型可计算的向量。从词袋、TF-IDF 到词向量(Word2Vec),再到上下文相关的 Transformer 表示。',
+       list:['词袋模型:忽略顺序,统计词频','TF-IDF:加权体现词的重要性','词向量:捕捉语义相似度','Transformer 表示:融入上下文']},
+      {h:'常用任务',body:'文本分类(垃圾邮件/情感)、序列标注(命名实体识别)、文本生成(摘要/对话)是三类典型任务,均有成熟的预训练模型可微调。'}
+    ]},
+
+  nginx:{title:'Nginx 反向代理',cat:'云计算运维',level:'实战',chapters:10,summary:'Nginx 高性能 Web 服务器,常用于静态托管、反向代理与负载均衡。',
+    sections:[
+      {h:'Nginx 定位',body:'Nginx 以高并发、低内存著称,常作为前端代理,转发请求到后端服务,并承担静态资源托管。'},
+      {h:'反向代理与负载均衡',body:'`proxy_pass` 把请求转发给后端,`upstream` 定义服务器组实现负载均衡。',
+       pre:'upstream backend {\n  server 127.0.0.1:8080;\n  server 127.0.0.1:8081;\n}\n\nserver {\n  listen 80;\n  location / {\n    proxy_pass http://backend;\n  }\n}'},
+      {h:'HTTPS 配置',body:'配置 SSL 证书开启 HTTPS,并做安全加固,是上线必备。',
+       pre:'server {\n  listen 443 ssl;\n  ssl_certificate /etc/ssl/fullchain.pem;\n  ssl_certificate_key /etc/ssl/privkey.pem;\n}'}
+    ]},
+  cicd:{title:'CI/CD 持续集成与部署',cat:'云计算运维',level:'实战',chapters:10,summary:'CI/CD 自动化「构建-测试-部署」流水线,让代码变更更快、更稳地上线。',
+    sections:[
+      {h:'CI/CD 是什么',body:'持续集成(CI)在代码提交后自动构建与测试;持续部署(CD)自动发布到环境。目标是把「发布」从手动操作变成自动化流程。'},
+      {h:'GitHub Actions',body:'用 workflow 文件定义流水线,在 push/PR 时触发,串起构建、测试、部署等步骤。',
+       pre:'name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n      - run: pip install -r requirements.txt\n      - run: pytest'},
+      {h:'部署实践',body:'产物构建后推送镜像、部署到服务器或 K8s。环境分离(dev/staging/prod)与回滚机制是稳定性保障。'}
+    ]},
+  bootstrap:{title:'Bootstrap 响应式框架',cat:'前端开发',level:'入门',chapters:11,summary:'Bootstrap 是最流行的响应式 CSS 框架,基于栅格系统快速搭建页面。',
+    sections:[
+      {h:'Bootstrap 定位',body:'Bootstrap 提供现成的栅格、组件与工具类,开箱即用,能显著加快开发,是后台管理系统与原型制作的常用选择。'},
+      {h:'栅格系统',body:'容器 + 行 + 列构成响应式布局,列用 col-* 断点控制不同屏幕下的宽度比例。',
+       pre:'<div class="container">\n  <div class="row">\n    <div class="col-md-6">左半</div>\n    <div class="col-md-6">右半</div>\n  </div>\n</div>'},
+      {h:'常用组件',body:'导航栏、按钮、卡片、表单、模态框、轮播等组件即插即用,配合按钮状态与表单校验。'},
+      {h:'定制与主题',body:'通过 Sass 变量定制主题色与间距,或用自定义 CSS 覆盖,避免千篇一律的 Bootstrap 观感。'}
+    ]},
+  jquery:{title:'jQuery 快速入门',cat:'前端开发',level:'入门',chapters:9,summary:'jQuery 让 DOM 操作与 AJAX 更简洁,是很多旧项目与插件的基石。',
+    sections:[
+      {h:'jQuery 特点',body:'jQuery 以「写得少,做得多」为理念,提供简洁的选择器与链式操作,简化 DOM 操作、事件与 AJAX。'},
+      {h:'选择器与链式',body:'基于 CSS 选择器选中元素,方法返回 jQuery 对象支持链式调用。',
+       pre:'$("#btn").on("click", function() {\n  $("ul").append("<li>新项</li>").fadeIn();\n});'},
+      {h:'DOM 与事件',body:'.html/.text/.css/.addClass 等操作 DOM,on/off 管理事件,ready 等待文档就绪。'},
+      {h:'AJAX',body:'$.ajax 与简化方法 $.get/$.post,请求数据并更新页面。现代项目常以 fetch 替代,但理解 jQuery 写法仍有用。'}
+    ]},
+  es6:{title:'ES6+ 新特性详解',cat:'前端开发',level:'进阶',chapters:12,summary:'ES6+ 重构了 JavaScript 的写法,是现代前端开发的必修基础。',
+    sections:[
+      {h:'变量与解构',body:'let/const 取代 var,块级作用域更可控;解构赋值让数组与对象取值更简洁。',
+       pre:'const [a, b] = [1, 2];\nconst { name, age } = user;\nconst t = `你好, ${name}`;'},
+      {h:'箭头函数与展开',body:'箭头函数简写并绑定 this;展开运算符 ... 展开数组与对象。',
+       pre:'const add = (x, y) => x + y;\nconst merged = { ...base, ...extra };'},
+      {h:'类与模块',body:'class 语法提供面向对象的写法;import/export 实现模块化,是现代工程的基础。',
+       pre:'export default class Logger {\n  log(msg) { console.log(msg); }\n}'},
+      {h:'异步与可选链',body:'Promise、async/await 让异步更清晰;可选链 ?. 与空值合并 ?? 让代码更稳健。'}
+    ]},
+  vite:{title:'Vite 构建工具',cat:'前端开发',level:'进阶',chapters:10,summary:'Vite 基于原生 ES 模块,开发启动极快,是新一代前端构建工具。',
+    sections:[
+      {h:'Vite 定位',body:'Vite 利用浏览器原生 ES Module,开发时按需编译、秒级启动;生产构建基于 Rollup,体验与产物兼备。'},
+      {h:'开发体验',body:'热更新(HMR)极快,内置对 TS、Vue、React、CSS 预处理器等开箱即用的支持。',
+       pre:'# 创建项目\nnpm create vite@latest my-app\ncd my-app\nnpm install\nnpm run dev'},
+      {h:'配置与生产',body:'vite.config.js 配置插件、别名、代理等;构建命令产出优化的静态资源,支持按需加载。'}
+    ]},
+
+  django:{title:'Django 实战',cat:'后端开发',level:'实战',chapters:13,summary:'Django 是全栈 Python Web 框架,自带后台、ORM 与认证,开发效率高。',
+    sections:[
+      {h:'MTV 架构',body:'Django 采用 Model-Template-View 架构:模型定义数据、模板负责呈现、视图处理请求,分工清晰。'},
+      {h:'模型与 ORM',body:'用 Python 类定义数据模型,Django ORM 自动生成数据库表,提供查询 API。',
+       pre:'from django.db import models\n\nclass Article(models.Model):\n    title = models.CharField(max_length=100)\n    body = models.TextField()\n    created = models.DateTimeField(auto_now_add=True)\n\nArticle.objects.filter(title__icontains="py")'},
+      {h:'认证与后台',body:'自带用户认证系统与 Admin 后台,几乎零成本完成登录、权限与内容管理。'},
+      {h:'项目实战',body:'urls 路由、views 视图、模板渲染串联成完整应用,配合 Django REST Framework 可构建 API。'}
+    ]},
+  fastapi:{title:'FastAPI 高性能 API',cat:'后端开发',level:'实战',chapters:10,summary:'FastAPI 基于类型提示与异步,自动生成 API 文档,性能对标 Node/Go。',
+    sections:[
+      {h:'FastAPI 特点',body:'利用 Python 类型提示做校验与序列化,自动生成 OpenAPI 文档,支持异步,是当下构建 API 的热门选择。'},
+      {h:'路由与类型',body:'用装饰器声明路由,参数类型即校验,响应自动转换。',
+       pre:'from fastapi import FastAPI\napp = FastAPI()\n\n@app.get("/items/{id}")\ndef get_item(id: int, q: str | None = None):\n    return {"id": id, "query": q}'},
+      {h:'依赖注入与异步',body:'Depends 实现依赖注入,重用认证、DB 会话等;async def 支持高并发 I/O。'},
+      {h:'自动文档',body:'启动后访问 /docs 即可获得可交互的 Swagger 文档,前后端联调更顺畅。'}
+    ]},
+  maven:{title:'Maven 构建工具',cat:'后端开发',level:'入门',chapters:10,summary:'Maven 是 Java 项目的标准构建与依赖管理工具。',
+    sections:[
+      {h:'Maven 定位',body:'通过一个 pom.xml 管理依赖、构建生命周期与插件,是 Java 工程的标配。'},
+      {h:'项目结构',body:'标准目录:src/main/java 源码、src/test 测试、target 产物。groupId/artifactId/version 唯一定位构件。',
+       pre:'<dependency>\n  <groupId>org.springframework.boot</groupId>\n  <artifactId>spring-boot-starter-web</artifactId>\n  <version>3.2.0</version>\n</dependency>'},
+      {h:'生命周期',body:'clean、validate、compile、test、package、install、deploy 等阶段构成构建流程,常用命令 mvn compile / test / package。'}
+    ]},
+  rest:{title:'RESTful API 设计规范',cat:'后端开发',level:'进阶',chapters:9,summary:'REST 是 HTTP 接口的主流设计风格,规范能大幅提升可维护性。',
+    sections:[
+      {h:'资源与状态码',body:'REST 以资源为中心,URI 表示资源,HTTP 动词表达操作,状态码表达结果。',
+       list:['GET /users:获取列表','POST /users:创建用户','PUT /users/{id}:整体更新','DELETE /users/{id}:删除','200/201/204:成功类,404/400/401:错误类']},
+      {h:'请求设计',body:'用查询参数做筛选与分页,用 JSON 传递结构化数据,避免动词型接口(如 /getUser)。'},
+      {h:'版本与安全',body:'通过路径或头进行版本管理,配合认证(JWT/OAuth)与限流保证接口安全与稳定。'}
+    ]},
+
+  c:{title:'C 语言入门教程',cat:'后端开发',level:'入门',chapters:12,summary:'C 语言是系统编程的基石,指针与内存管理是核心,嵌入式与底层开发的基础。',
+    sections:[
+      {h:'C 语言概述',body:'结构化语言,贴近硬件,是操作系统、嵌入式与性能敏感系统的基石,很多现代语言都由它衍生。'},
+      {h:'指针与内存',body:'指针直接操作内存地址,malloc/free 手动管理内存,是 C 的难点也是其威力所在。',
+       pre:'int a = 10;\nint *p = &a;   // p 指向 a 的地址\nprintf("%d\\n", *p);  // 解引用取出 10'},
+      {h:'函数与结构体',body:'函数组织逻辑,结构体组织数据,配合指针可构建链表、树等数据结构。'}
+    ]},
+  cpp:{title:'C++ 语言入门',cat:'后端开发',level:'入门',chapters:14,summary:'C++ 在 C 之上加入面向对象与模板,兼顾性能与抽象,游戏、高频交易、底层系统广泛使用。',
+    sections:[
+      {h:'C++ 特性',body:'兼容 C,引入类、继承、多态、模板与标准库 STL,被称为「带类的 C」。'},
+      {h:'类与对象',body:'封装数据与行为,构造函数初始化,成员函数操作对象状态。',
+       pre:'class Dog {\npublic:\n  Dog(std::string n) : name(n) {}\n  void bark() { std::cout << name << " 汪汪" << std::endl; }\nprivate:\n  std::string name;\n};'},
+      {h:'STL 与内存',body:'vector/map/string 等容器开箱即用,new/delete 与智能指针(shared_ptr)管理内存,避免泄漏。'}
+    ]},
+  qt:{title:'Qt 图形界面开发',cat:'后端开发',level:'进阶',chapters:12,summary:'Qt 是跨平台 C++ 图形界面框架,信号槽机制强大,广泛用于桌面与嵌入式 GUI。',
+    sections:[
+      {h:'Qt 概述',body:'跨平台 GUI 框架,信号槽连接组件与逻辑,官方 IDE 为 Qt Creator,支持 Widgets 与 QML。'},
+      {h:'信号与槽',body:'组件发出信号,槽函数响应,解耦界面与业务,是 Qt 事件驱动的核心。',
+       pre:'QPushButton btn("点击");\nQObject::connect(&btn, &QPushButton::clicked, []{\n  qDebug() << "按钮被点击";\n});'},
+      {h:'常用控件与布局',body:'QWidget/QMainWindow、布局管理器、事件循环 QApplication::exec(),快速搭建桌面应用。'}
+    ]},
+  linux:{title:'Linux 系统入门',cat:'后端开发',level:'入门',chapters:13,summary:'Linux 是服务器与云计算的基石,掌握命令、文件系统与进程管理是运维与开发必备。',
+    sections:[
+      {h:'命令基础',body:'cd/ls/cp/mv/rm 管理文件,管道与重定向串联命令,chmod 控制权限。',
+       pre:'ls -l /etc\ncat /etc/passwd | grep root\nchmod 755 script.sh'},
+      {h:'文件与进程',body:'文件系统层级(FHS),ps/top 查看进程,systemd 管理服务,网络用 ip/ss 排查。'},
+      {h:'Shell 脚本',body:'变量、循环、条件判断与函数,是自动化运维与批量处理的起点。',
+       pre:'#!/bin/bash\nfor i in {1..5}; do\n  echo "count: $i"\ndone'}
+    ]},
+  stm32:{title:'STM32 嵌入式开发',cat:'嵌入式开发',level:'实战',chapters:15,summary:'STM32 是主流 ARM Cortex-M 微控制器,GPIO、定时器、串口、中断构成嵌入式开发核心。',
+    sections:[
+      {h:'STM32 概览',body:'基于 ARM Cortex-M 内核,外设丰富,配合 HAL 库与 STM32CubeMX 图形化配置开发。'},
+      {h:'GPIO 点亮 LED',body:'配置引脚模式与电平,结合延时实现闪烁,是嵌入式第一个实验。',
+       pre:'HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);\nHAL_Delay(500);\nHAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);'},
+      {h:'定时器与串口',body:'定时器做精确计时/定时,USART 串口收发数据,中断处理实时事件,构成与外设交互基础。'}
+    ]},
+  stc51:{title:'51 单片机入门',cat:'嵌入式开发',level:'入门',chapters:12,summary:'51 单片机(8051)是经典 8 位单片机,结构简单、资料丰富,是嵌入式入门的最佳起点。',
+    sections:[
+      {h:'51 单片机概览',body:'经典 8 位 MCU,常用 Keil C51 编程,IO 口直控外设,广泛用于教学与简单控制。'},
+      {h:'点亮 LED',body:'通过 sbit 定义位,配合延时循环控制电平翻转,理解寄存器操作。',
+       pre:'#include <reg52.h>\nsbit led = P1^0;\nvoid main() {\n  while(1) {\n    led = 0;   // 低电平点亮\n    delay(500);\n    led = 1;\n    delay(500);\n  }\n}'},
+      {h:'中断与定时器',body:'外部中断响应事件,定时器 0/1 计时,串口通信,是控制与通信的基础。'}
+    ]},
+  stm32intro:{title:'STM32 入门教程',cat:'嵌入式开发',level:'入门',chapters:11,summary:'STM32 是流行的 ARM 单片机,从开发环境到 GPIO 控制,迈出嵌入式第一步。',
+    sections:[
+      {h:'环境搭建',body:'安装 STM32CubeMX 与 STM32CubeIDE/Keil,配置芯片型号、时钟与引脚,自动生成初始化工程。'},
+      {h:'点亮 LED 进阶',body:'用 HAL 库初始化 GPIO 为输出,配合延时函数实现 LED 闪烁,理解外设寄存器。',
+       pre:'HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);\nHAL_Delay(300);\nHAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);'},
+      {h:'串口调试',body:'配置 USART 重定向 printf 打印日志,是嵌入式开发最常用的调试手段。'}
+    ]},
+  arduino:{title:'Arduino 入门',cat:'嵌入式开发',level:'入门',chapters:10,summary:'Arduino 是上手最快的开源硬件平台,接线简单、函数库丰富,适合快速原型与创客实践。',
+    sections:[
+      {h:'Arduino 概览',body:'开源微控制器平台,IDE 极简,内置丰富库,生态庞大,适合初学者与快速验证想法。'},
+      {h:'点亮 LED',body:'数字 IO 输出高低电平,配合延时循环实现闪烁,是最经典的第一个实验。',
+       pre:'void setup() {\n  pinMode(LED_BUILTIN, OUTPUT);\n}\nvoid loop() {\n  digitalWrite(LED_BUILTIN, HIGH);\n  delay(1000);\n  digitalWrite(LED_BUILTIN, LOW);\n  delay(1000);\n}'},
+      {h:'传感器与扩展',body:'模拟输入读传感器,串口输出数据,配合外接模块快速搭建原型。'}
+    ]},
+  circuit:{title:'电路基础',cat:'嵌入式开发',level:'入门',chapters:12,summary:'从欧姆定律到常用电子元件,是理解硬件与单片机开发的地基。',
+    sections:[
+      {h:'基本概念',body:'电流、电压、电阻,欧姆定律 U=IR,理解串联与并联电路的电压电流关系。'},
+      {h:'常用元件',body:'电阻、电容、二极管、三极管、LED、按键与晶振,各司其职,构成硬件的基本单元。'},
+      {h:'电路搭建',body:'面包板接线、供电与上拉/下拉电阻,为单片机外设的连接打下基础。'}
+    ]},
+  rtos:{title:'RTOS 实时操作系统',cat:'嵌入式开发',level:'进阶',chapters:11,summary:'FreeRTOS 等实时操作系统以任务与信号量调度,是复杂嵌入式系统的核心。',
+    sections:[
+      {h:'实时系统概念',body:'任务、优先级与调度器,相比裸机循环能更可靠地处理多路并发的实时需求。'},
+      {h:'FreeRTOS 任务',body:'创建任务、设置优先级,由调度器按优先级抢占切换。',
+       pre:'xTaskCreate(vTask1, "Task1", 128, NULL, 1, NULL);\nvTaskStartScheduler();  // 启动调度器'},
+      {h:'同步与通信',body:'信号量、队列与互斥锁,协调任务间共享资源与数据传递。'}
+    ]},
+  oracle:{title:'Oracle 数据库基础',cat:'数据库',level:'入门',chapters:12,summary:'Oracle 是功能强大的商用关系数据库,广泛用于金融与大型企业。',
+    sections:[
+      {h:'Oracle 特点',body:'高性能、强事务与丰富功能,是大型系统的主流选择。包含表空间、序列、PL/SQL 等特色能力。'},
+      {h:'PL/SQL',body:'Oracle 的编程语言,支持变量、流程控制与游标,可在数据库中编写过程与函数。',
+       pre:'BEGIN\n  FOR r IN (SELECT name FROM users) LOOP\n    DBMS_OUTPUT.PUT_LINE(r.name);\n  END LOOP;\nEND;'},
+      {h:'表空间与常用函数',body:'表空间管理数据存储;常用函数含 NVL(空值处理)、DECODE、聚合与日期函数。'}
+    ]},
+  clickhouse:{title:'ClickHouse 列式数据库',cat:'数据库',level:'进阶',chapters:10,summary:'ClickHouse 是高性能列式数据库,专为大规模数据分析而生。',
+    sections:[
+      {h:'列式存储',body:'按列存储数据,读取时只取所需列,配合压缩,大幅提升分析查询性能,适合 OLAP 场景。'},
+      {h:'表引擎',body:'MergeTree 系列是核心引擎,支持分区、主键与数据合并;按场景选择引擎。',
+       pre:'CREATE TABLE events (\n  ts DateTime,\n  user_id UInt32,\n  action String\n) ENGINE = MergeTree\nORDER BY ts;'},
+      {h:'分析查询',body:'SQL 与聚合函数丰富,海量数据下秒级返回,常用于用户行为分析与实时报表。'}
+    ]},
+  nosql:{title:'NoSQL 概览与选型',cat:'数据库',level:'入门',chapters:9,summary:'NoSQL 覆盖键值、文档、列族与图四大类型,应对不同数据需求。',
+    sections:[
+      {h:'四大类型',body:'NoSQL 按数据模型分类:键值存储(Redis)、文档型(MongoDB)、列族(HBase/Cassandra)、图数据库(Neo4j)。',
+       list:['键值:极快读写,适合缓存与会话','文档:灵活 schema,适合业务多变','列族:海量数据扩展,适合大数据','图:关系复杂,适合社交/推荐']},
+      {h:'适用场景',body:'高并发缓存、实时推荐、社交图谱、海量日志等场景各有擅长,NoSQL 与关系型常互补使用。'},
+      {h:'选型建议',body:'按「一致性、可用性、分区容错(CAP)」权衡,结合读写模式与扩展需求选择,避免「为用而用」。'}
+    ]},
+  idxopt:{title:'数据库索引与查询优化',cat:'数据库',level:'进阶',chapters:11,summary:'索引是查询加速的核心,掌握索引原理与慢查询优化是数据库进阶关键。',
+    sections:[
+      {h:'索引原理',body:'索引类似书的目录,用额外存储换取快速查找。B+Tree 索引支持范围查询,覆盖索引可避免回表。'},
+      {h:'慢查询分析',body:'用 EXPLAIN 查看执行计划,关注 type、key、rows 等字段,定位全表扫描与索引失效。',
+       pre:'EXPLAIN SELECT * FROM orders\nWHERE user_id = 123\nORDER BY created_at DESC;\n-- 关注:type、possible_keys、rows'},
+      {h:'优化实践',body:'为高频查询条件建合适索引,避免函数包裹列导致索引失效,用覆盖索引与分页优化大表查询,避免 SELECT *。'}
+    ]},
+
+  kotlin:{title:'Kotlin 语言入门',cat:'移动开发',level:'入门',chapters:12,summary:'Kotlin 是现代 Android 开发的官方语言,简洁安全。',
+    sections:[
+      {h:'Kotlin 特点',body:'兼容 Java,语法更简洁,内置空安全与扩展函数,协程简化异步,是 Android 首选。'},
+      {h:'语法特性',body:'类型推断、数据类、when 表达式、扩展函数让代码更精炼。',
+       pre:'data class User(val id: Int, val name: String)\n\nfun User.greeting() = "你好, ${name}"\n\nval u = User(1, "小明")\nprintln(u.greeting())'},
+      {h:'空安全与协程',body:'类型系统区分可空/非空,规避空指针;协程 suspend 函数处理异步,轻量高效。'}
+    ]},
+  swift:{title:'Swift 语言入门',cat:'移动开发',level:'入门',chapters:12,summary:'Swift 是 Apple 平台的官方编程语言,安全现代。',
+    sections:[
+      {h:'Swift 特点',body:'类型安全、语法现代、性能接近 C,是 iOS/macOS 开发的主力语言。'},
+      {h:'语法特性',body:'类型推断、可选类型、闭包、结构体与协议,兼具脚本的灵活与编译型的高效。',
+       pre:'func greet(name: String) -> String {\n  return "你好, \\(name)"\n}\n\nlet people = ["小明", "小红"]\npeople.map { greet(name: $0) }'},
+      {h:'可选与协议',body:'Optional 显式处理「可能无值」;协议 protocol 定义接口,配合泛型构建弹性代码。'}
+    ]},
+  uniapp:{title:'uni-app 跨端开发',cat:'移动开发',level:'实战',chapters:11,summary:'uni-app 用 Vue 语法一套代码,可发布到小程序、App 与 H5 等多端。',
+    sections:[
+      {h:'一套多端',body:'基于 Vue 开发,编译到微信小程序、支付宝小程序、App 与 Web,降低多端维护成本。'},
+      {h:'页面与组件',body:'结构与 Vue 一致,内置跨端组件与 API,条件编译处理平台差异。',
+       pre:'<template>\n  <view>\n    <text>{{ msg }}</text>\n    <button @tap="say">点我</button>\n  </view>\n</template>\n<\\/script>\nexport default {\n  data() { return { msg: "Hello uni-app" } },\n  methods: { say() { uni.showToast({ title: this.msg }) } }\n}\n<\\/script>'},
+      {h:'发布',body:'一套代码分别打包到小程序、App(离线打包或云打包)与 H5,统一由 HBuilderX 或 CLI 构建。'}
+    ]},
+  pwa:{title:'PWA 渐进式 Web 应用',cat:'移动开发',level:'进阶',chapters:10,summary:'PWA 让网页拥有安装、离线与推送等原生应用能力。',
+    sections:[
+      {h:'核心能力',body:'PWA 通过 Web App Manifest 实现可安装,Service Worker 实现离线缓存,加上推送通知,体验接近原生。'},
+      {h:'Service Worker',body:'独立于页面的脚本,拦截请求并做缓存策略,实现离线可用与性能优化。',
+       pre:'self.addEventListener("fetch", (e) => {\n  e.respondWith(\n    caches.match(e.request)\n      .then(r => r || fetch(e.request))\n  );\n});'},
+      {h:'安装与离线',body:'注册 Service Worker + Manifest 后,用户可「添加到主屏幕」,核心资源缓存后断网也能打开。'}
+    ]},
+
+  cv:{title:'计算机视觉入门',cat:'人工智能',level:'入门',chapters:12,summary:'计算机视觉让机器看懂图像,是自动驾驶、安防与医学影像的基础。',
+    sections:[
+      {h:'图像表示',body:'图像在计算机中是像素矩阵,彩色图有 RGB 三通道。预处理(缩放、归一化)是训练前提。'},
+      {h:'CNN 图像分类',body:'卷积神经网络自动提取边缘、纹理等特征,是图像分类的主力。',
+       pre:'from torchvision import models\nmodel = models.resnet18(pretrained=True)'},
+      {h:'目标检测与分割',body:'目标检测定位物体并分类(如 YOLO),语义分割逐像素分类,是更精细的视觉任务。'}
+    ]},
+  rl:{title:'强化学习入门',cat:'人工智能',level:'进阶',chapters:11,summary:'强化学习让智能体通过与环境互动试错学习最优策略。',
+    sections:[
+      {h:'核心概念',body:'智能体、环境、状态、动作与奖励构成闭环。目标是最大化累积奖励,如 AlphaGo、机器人控制。'},
+      {h:'马尔可夫决策',body:'用 MDP 形式化问题:状态转移与奖励定义环境,策略决定每个状态的动作。'},
+      {h:'常用算法',body:'Q-Learning 维护价值表,DQN 用神经网络逼近 Q 值,策略梯度直接优化策略,各有适用场景。'}
+    ]},
+  sklearn:{title:'Scikit-learn 机器学习实战',cat:'人工智能',level:'实战',chapters:11,summary:'Scikit-learn 是 Python 最经典的机器学习库,API 统一,入门实战首选。',
+    sections:[
+      {h:'库定位',body:'sklearn 覆盖数据预处理、模型训练、评估与调参的完整流程,API 风格统一,文档优秀。'},
+      {h:'模型训练',body:'fit 训练、predict 预测、score 评估,几行代码完成一个分类任务。',
+       pre:'from sklearn.ensemble import RandomForestClassifier\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y)\nclf = RandomForestClassifier()\nclf.fit(X_train, y_train)\nprint(clf.score(X_test, y_test))'},
+      {h:'调参与评估',body:'GridSearchCV 网格搜索最佳参数,交叉验证与混淆矩阵评估模型可靠性。'}
+    ]},
+  prompt:{title:'Prompt 工程进阶',cat:'人工智能',level:'实战',chapters:10,summary:'提示词工程是驾驭大模型的关键技能,直接影响输出质量。',
+    sections:[
+      {h:'结构化提示',body:'清晰定义角色、任务、约束与输出格式,让模型行为可预期。',
+       pre:'SYSTEM: 你是严谨的代码评审工程师\n\nUSER: 请评审以下代码,指出可读性、安全与性能问题,\n按「问题-建议-示例」格式输出,最多 5 条。'},
+      {h:'思维链与示例',body:'引导模型分步推理(COT)提升复杂问题正确率;提供 few-shot 示例示范期望输出风格。'},
+      {h:'约束与安全',body:'设置输出边界、拒绝越权指令,校验输出避免注入与幻觉,关键场景加人工兜底。'}
+    ]},
+
+  ansible:{title:'Ansible 自动化运维',cat:'云计算运维',level:'实战',chapters:11,summary:'Ansible 无代理的自动化工具,用 Playbook 声明式管理多台服务器。',
+    sections:[
+      {h:'无代理架构',body:'Ansible 通过 SSH 控制节点,无需在目标安装客户端,学习与部署成本低。'},
+      {h:'Playbook',body:'用 YAML 编写任务序列,声明式描述「要达到什么状态」。',
+       pre:'- hosts: webservers\n  become: yes\n  tasks:\n    - name: 安装 Nginx\n      apt:\n        name: nginx\n        state: present\n    - name: 启动服务\n      service:\n        name: nginx\n        state: started'},
+      {h:'角色与变量',body:'角色(Role)组织可复用任务,变量与模板实现配置差异化,适合规模化运维。'}
+    ]},
+  prometheus:{title:'Prometheus 监控体系',cat:'云计算运维',level:'实战',chapters:11,summary:'Prometheus 是云原生监控的事实标准,以指标抓取与查询为核心。',
+    sections:[
+      {h:'监控模型',body:'以「指标 + 标签」模型抓取时间序列数据,配合 exporter 采集各类系统与应用的指标。'},
+      {h:'PromQL 查询',body:'PromQL 查询与聚合指标,支持瞬时与区间查询,是看板与告警的基础。',
+       pre:'# CPU 使用率\n100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)\n# 请求错误率\nsum(rate(http_requests_total{status="5xx"}[5m])) / sum(rate(http_requests_total[5m]))'},
+      {h:'告警与看板',body:'Alertmanager 处理告警并推送通知,Grafana 可视化指标,构成完整监控闭环。'}
+    ]},
+  terraform:{title:'Terraform 基础设施即代码',cat:'云计算运维',level:'进阶',chapters:11,summary:'Terraform 用声明式代码管理云基础设施,可版本化、可复用。',
+    sections:[
+      {h:'IaC 理念',body:'用代码描述云资源(如服务器、网络),而非手动点击控制台,实现可审计、可回滚的基建管理。'},
+      {h:'声明式资源',body:'编写 .tf 文件声明资源,terraform apply 创建/更新/删除差异。',
+       pre:'resource "aws_instance" "web" {\n  ami           = "ami-0c55b159cbfafe1f0"\n  instance_type = "t3.micro"\n  tags = { Name = "web" }\n}'},
+      {h:'状态与工作流',body:'state 文件记录资源现状,配合 plan 预演变更,工作流:init → plan → apply,多人协作需共享状态。'}
+    ]},
+  serverless:{title:'Serverless 无服务器架构',cat:'云计算运维',level:'进阶',chapters:10,summary:'Serverless 让开发者专注业务代码,平台自动弹性伸缩与计费。',
+    sections:[
+      {h:'函数即服务',body:'以函数为最小单元,平台负责运行、扩容与高可用,按调用次数与时长计费,零闲置成本。'},
+      {h:'触发与集成',body:'函数由事件触发:HTTP 请求、消息队列、定时任务、对象存储事件等,天然事件驱动。',
+       pre:'# 一个简单的云函数(示例)\ndef handler(event, context):\n    return {"statusCode": 200, "body": "Hello Serverless"}'},
+      {h:'架构实践',body:'配合 API 网关、消息队列与云数据库构建无服务器应用,适合弹性多变、低频却突发的场景。'}
+    ]},
+  comparch:{title:'计算机组成原理',cat:'计算机基础',level:'入门',chapters:12,summary:'计算机硬件结构与工作原理。',
+    sections:[
+      {h:'体系结构',body:'CPU、内存、总线、输入输出五大部件,遵循冯·诺依曼「存储程序」结构。'},
+      {h:'CPU 与指令',body:'寄存器与指令周期(取指、译码、执行),时钟频率与流水线影响性能。'},
+      {h:'存储层次',body:'寄存器、Cache、内存、磁盘构成金字塔,利用局部性原理提升访存效率。'}
+    ]},
+  dsalg:{title:'数据结构与算法',cat:'计算机基础',level:'入门',chapters:15,summary:'数据结构与算法是程序设计的核心基础。',
+    sections:[
+      {h:'线性结构',body:'数组、链表、栈、队列,各有适用场景,是组织数据的基本方式。'},
+      {h:'树与图',body:'二叉树、遍历(前中后序/层序),图为网络与关系的抽象。'},
+      {h:'排序与查找',body:'冒泡/快排、二分查找,理解时间与空间复杂度。',
+       pre:'function quickSort(arr){\n  if(arr.length<=1) return arr;\n  const p=arr[0], l=[], r=[];\n  for(let i=1;i<arr.length;i++){\n    (arr[i]<p?l:r).push(arr[i]);\n  }\n  return [...quickSort(l), p, ...quickSort(r)];\n}'}
+    ]},
+  cdsalg:{title:'C语言数据结构与算法',cat:'计算机基础',level:'入门',chapters:14,summary:'用 C 语言实现核心数据结构与算法。',
+    sections:[
+      {h:'数组与指针',body:'数组下标与指针遍历内存,理解两者的等价与差异。',
+       pre:'int a[5] = {1,3,5,7,9};\nint *p = a;             // 指向数组首元素\nfor(int i=0;i<5;i++) printf("%d ", *(p+i));'},
+      {h:'链表',body:'单链表的创建、插入与删除,体会指针连接与动态内存管理。'},
+      {h:'查找与排序',body:'线性/二分查找,选择与冒泡排序,巩固基础算法。'}
+    ]},
+  design:{title:'设计模式',cat:'计算机基础',level:'进阶',chapters:13,summary:'经典软件设计思想,提升代码复用与可维护性。',
+    sections:[
+      {h:'设计原则',body:'开闭、单一职责、依赖倒置等原则,是模式的指导思想。'},
+      {h:'创建型模式',body:'单例、工厂、建造者,控制对象的创建方式。',
+       pre:'// 单例:保证一个类只有一个实例\nclass Singleton {\n  static getInstance() {\n    if(!Singleton._ins) Singleton._ins = new Singleton();\n    return Singleton._ins;\n  }\n}'},
+      {h:'结构型与行为型',body:'适配器、观察者、策略等,灵活组合对象与算法。'}
+    ]},
+  pydesign:{title:'Python 设计模式',cat:'计算机基础',level:'进阶',chapters:12,summary:'Python 面向对象设计实践。',
+    sections:[
+      {h:'Python OOP',body:'类、继承、多态与魔术方法,是设计模式的语言基础。'},
+      {h:'单例与工厂',body:'用 __new__ 实现单例,工厂方法解耦创建逻辑。',
+       pre:'class Singleton:\n    _ins = None\n    def __new__(cls, *a, **k):\n        if cls._ins is None:\n            cls._ins = super().__new__(cls)\n        return cls._ins'},
+      {h:'装饰器与策略',body:'装饰器实现切面逻辑,策略模式动态切换算法。'}
+    ]},
+  regex:{title:'正则表达式',cat:'计算机基础',level:'入门',chapters:10,summary:'正则表达式用于字符串匹配与文本处理。',
+    sections:[
+      {h:'基本语法',body:'字符类、量词、分组与断言,是正则的核心构成。',
+       pre:'^\\d{3}-\\d{4}-\\d{4}$   // 匹配 138-1234-5678 式电话'},
+      {h:'常用模式',body:'邮箱、URL、手机号等常见匹配,配合替换与提取。'},
+      {h:'实战应用',body:'日志解析、数据清洗、表单校验,正则无处不在。'}
+    ]},
+  http:{title:'学习 HTTP',cat:'计算机基础',level:'入门',chapters:11,summary:'HTTP 是 Web 通信协议。',
+    sections:[
+      {h:'HTTP 基础',body:'请求-响应模型,方法、URL 与状态码共同描述一次通信。',
+       list:['GET/POST/PUT/DELETE:请求方法','200/301/404/500:常见状态码','Content-Type/Cache:常用 Header']},
+      {h:'请求与响应',body:'报文由起始行、首部与主体组成,Header 携带元信息。'},
+      {h:'HTTPS 与安全',body:'TLS 加密传输,证书校验身份,保护数据机密与完整。'}
+    ]},
+  tcpip:{title:'学习 TCP/IP',cat:'计算机基础',level:'入门',chapters:12,summary:'TCP/IP 是互联网通信协议族。',
+    sections:[
+      {h:'四层模型',body:'应用、传输、网络、链路四层,分工协作完成端到端通信。'},
+      {h:'TCP 可靠传输',body:'三次握手建立连接,滑动窗口与确认重传保证可靠。',
+       pre:'三次握手:\n1) Client -> Server: SYN\n2) Server -> Client: SYN + ACK\n3) Client -> Server: ACK'},
+      {h:'IP 与寻址',body:'IP 地址、子网掩码与路由,定位与转发数据报。'}
+    ]},
+  netproto:{title:'网络协议',cat:'计算机基础',level:'入门',chapters:12,summary:'计算机网络通信规则。',
+    sections:[
+      {h:'网络分层',body:'OSI 七层与 TCP/IP 四层的对应关系,理解分层思想。'},
+      {h:'核心协议',body:'HTTP、DNS、DHCP、ARP 等,各司其职协同工作。'},
+      {h:'抓包与排障',body:'用 ping/traceroute 与抓包工具观察数据包,定位网络问题。'}
+    ]},
+  w3c:{title:'学习 W3C',cat:'计算机基础',level:'入门',chapters:9,summary:'W3C 是制定 Web 标准的国际组织。',
+    sections:[
+      {h:'W3C 简介',body:'万维网联盟制定 HTML、CSS 等开放标准,推动 Web 互通。'},
+      {h:'核心规范',body:'HTML、CSS、可访问性(WCAG)等规范,指导网页开发。'},
+      {h:'标准的意义',body:'遵循标准保证跨浏览器一致与开放,提升可维护与可访问性。'}
+    ]},
+};
+
+/* ---------- 指南内容数据 ---------- */const GUIDES = {
+  'g-front':{title:'前端工程师学习路线',cat:'行业指导 · 学习路线',summary:'一份面向零基础转前端的学习路径,分四阶段稳步推进。',
+    sections:[
+      {h:'路线概览',body:'前端学习建议遵循「基础 → 语言 → 框架 → 工程化」的递进顺序。基础阶段建立页面感觉,语言阶段理解逻辑,框架阶段进入工程,最后用项目沉淀能力。',
+       list:['阶段一 页面基础:HTML + CSS(约 1 个月)','阶段二 语言进阶:JavaScript + ES6(约 1.5 个月)','阶段三 框架实战:Vue/React(约 2 个月)','阶段四 工程化与项目(约 1.5 个月)']},
+      {h:'阶段一:页面基础',body:'目标是能用 HTML 搭建结构、用 CSS 控制样式与布局。重点掌握语义化标签、Flex/Grid 布局、响应式设计。',
+       list:['HTML 语义化与常用标签','盒模型、选择器、层叠规则','Flex 与 Grid 两套布局','媒体查询与移动优先']},
+      {h:'阶段二:语言进阶',body:'JavaScript 是前端的核心。除了语法,更要理解事件循环、作用域、闭包、异步编程这些「内功」。',
+       list:['变量、类型、函数与对象','DOM 操作与事件','Promise 与 async/await','ES6+ 新特性']},
+      {h:'阶段三:框架实战',body:'Vue 与 React 二选一即可。框架是工具,理解组件化思想比记 API 更重要。',
+       list:['组件化与 Props/State','路由管理','状态管理(可选)','用框架完成一个小项目']},
+      {h:'阶段四:工程化',body:'从「能写」到「能上线」,补齐工程化短板:打包、规范、测试、部署。',
+       list:['Vite/Webpack 构建','代码规范与 ESLint','Git 协作','部署与性能优化']}
+    ]},
+  'g-back':{title:'后端工程师学习路线',cat:'行业指导 · 学习路线',summary:'面向零基础转后端的学习路径,侧重语言、数据与架构能力。',
+    sections:[
+      {h:'路线概览',body:'后端学习围绕「语言 + 数据 + 网络 + 架构」展开。先扎实语言与数据,再进入接口开发,最后理解分布式。',
+       list:['阶段一 语言与基础(约 1.5 个月)','阶段二 数据与网络(约 2 个月)','阶段三 框架与接口(约 2 个月)','阶段四 架构进阶(约 2 个月)']},
+      {h:'阶段一:语言与基础',body:'选择一门主语言深入:Python 上手快、Java 就业广、Go 高性能。同时补充数据结构与算法基础。'},
+      {h:'阶段二:数据与网络',body:'数据库设计决定应用质量。SQL 要熟练,HTTP 原理要理解,操作系统与网络的常识也要具备。',
+       list:['SQL 与数据库建模','Redis 等缓存','HTTP/HTTPS 原理','操作系统与网络基础']},
+      {h:'阶段三:框架与接口',body:'用 Web 框架开发 RESTful API,关注认证、校验、日志与错误处理。',
+       list:['Flask/Spring Boot/Express 等','RESTful 设计规范','JWT 认证与安全','接口文档']},
+      {h:'阶段四:架构进阶',body:'进入高并发与分布式领域:消息队列、缓存一致性、限流、微服务。',
+       list:['消息队列 Kafkna/RabbitMQ','分布式缓存','数据库分库分表','微服务与治理']}
+    ]},
+  'g-role':{title:'技术岗位全景',cat:'行业指导 · 职业规划',summary:'了解各大技术岗位的职责、技能与前景,帮你找准方向。',
+    sections:[
+      {h:'前端工程师',body:'负责用户界面与交互。核心技能:HTML/CSS/JS 与框架。工作直观、反馈快,转行门槛相对低,近年市场趋于饱和、竞争加剧。'},
+      {h:'后端工程师',body:'负责服务端逻辑、数据与接口。核心技能:一门语言 + 数据库 + 架构。需求稳定、天花板高,是工程师主力军。'},
+      {h:'算法工程师',body:'负责模型与算法。核心技能:数学 + 机器学习 + 工程。门槛最高,通常要求硕博或强背景,薪资上限高。'},
+      {h:'测试工程师',body:'负责质量保障与自动化。核心技能:测试理论 + 自动化脚本。近年来测试开发(测开)更吃香。'},
+      {h:'运维/DevOps',body:'负责部署、监控与稳定性。核心技能:Linux + 容器 + 云平台。云原生时代运维价值持续提升。'}
+    ]},
+  'g-stack':{title:'如何选择第一门技术栈',cat:'行业指导 · 职业规划',summary:'结合兴趣、市场与成长空间,理性选择第一门技术。',
+    sections:[
+      {h:'三个判断维度',body:'选技术栈不是选「最好」,而是选「最适合自己」。从兴趣、市场需求、长期成长三个角度权衡。',
+       list:['兴趣:哪个方向你愿意长期投入时间?','市场:本地/目标城市哪个岗位需求大、竞争小?','成长:这门技术的天花板与生态是否足够?']},
+      {h:'常见选择建议',body:'偏好界面与设计 → 前端;偏好逻辑与数据 → 后端;对 AI 感兴趣且有数学底子 → 算法;喜欢折腾服务器 → 运维。',
+       list:['想快速看到成果:前端 + 轻量全栈','想稳定高薪:Java/Python 后端','想拥抱 AI 浪潮:Python + 机器学习','想技术沉淀深:Go/后端架构']},
+      {h:'避免的误区',body:'不要盲目追逐「热门」而忽略兴趣,不要一上来就同时学多门语言,先扎深一门再横向扩展。'
+      +'<div class="warn">注意:职业方向会随市场变化,选择时保持灵活,持续关注行业动态。</div>'}
+    ]},
+  'g-grow':{title:'工程师的成长阶梯',cat:'行业指导 · 职业规划',summary:'从初级到资深的成长路径,技术之外更要修炼综合能力。',
+    sections:[
+      {h:'初级工程师',body:'能独立完成分配的功能开发,在指导下解决 bug。重点:把基础打牢,养成良好代码习惯。'},
+      {h:'中级工程师',body:'能独立负责模块设计,带新人,参与技术评审。重点:广度拓展 + 一定的架构能力。'},
+      {h:'高级工程师',body:'能主导系统架构与关键技术决策,影响团队技术方向。重点:深度 + 系统思维 + 影响力。'},
+      {h:'技术专家/管理者',body:'深耕某一领域成为专家,或转向技术管理带领团队。重点:视野、判断力与领导力。'}
+    ]},
+  'g-resume':{title:'技术简历撰写要点',cat:'行业指导 · 求职准备',summary:'用项目量化成果,用 STAR 法则组织经历,避开常见雷区。',
+    sections:[
+      {h:'简历的核心目标',body:'简历不是履历,是「你如何解决问题」的证据。技术简历最看重项目经验与动手能力。'},
+      {h:'项目经验怎么写',body:'用 STAR 法则:背景(Situation)、任务(Task)、行动(Action)、结果(Result)。务必量化成果。',
+       list:['不要只写「参与了 XX 项目」,要写清你负责什么、如何实现、达到什么效果','用数字说话:如「优化后接口 P95 从 800ms 降到 200ms」','体现技术深度:描述难点与解决方案']},
+      {h:'常见雷区',body:'避免流水账、避免堆砌「精通」、避免与岗位无关的内容、避免错别字与排版混乱。',
+       pre:'示例项目描述:\n\n某电商后台管理系统(全栈)\n· 负责订单模块设计与开发,基于 Spring Boot + Vue\n· 引入 Redis 缓存热点数据,接口吞吐提升 40%\n· 编写 30+ 接口与完整单元测试,覆盖率 85%'}
+    ]},
+  'g-interview':{title:'面试高频题与准备策略',cat:'行业指导 · 求职准备',summary:'系统准备基础、算法与项目讲解,从容应对技术面试。',
+    sections:[
+      {h:'三类必考点',body:'技术面试通常考察:基础八股(语言/框架原理)、算法题(数据结构)、项目深挖。三类都要准备。',
+       list:['基础八股:网络、操作系统、语言特性、框架原理','算法:数组/链表/树、排序、DP、常用数据结构','项目:深挖你简历里写的每个细节']},
+      {h:'准备策略',body:'用「输出倒逼输入」:把知识点讲给别人听,或写成文章。算法题坚持刷题打卡,养成手感。',
+       list:['八股按主题整理思维导图,理解而非背诵','算法每天 2–3 题,先做高频题','项目准备好清晰的 STAR 讲解与难点复盘']},
+      {h:'面试中的表达',body:'回答注意条理:先说结论,再展开细节。不会的问题坦诚说「不太了解,但我的理解是…」,比硬编更强。'
+      +'<div class="tip">软实力同样重要:沟通清晰、逻辑缜密、态度积极,是加分项。</div>'}
+    ]},
+  'g-project':{title:'做出有说服力的项目',cat:'行业指导 · 求职准备',summary:'一个高质量项目是求职最大的底气,从选题到复盘完整走一遍。',
+    sections:[
+      {h:'选题原则',body:'选「真实、完整、有亮点」的项目:能解决一个实际问题,技术栈有代表性,最好有线上可访问地址。',
+       list:['避免课程作业式项目,做有真实使用价值的工具','完整包含前端 + 后端 + 数据库','部署上线,留下可访问链接']},
+      {h:'亮点设计',body:'在通用功能之上,加一两个技术亮点:性能优化、安全设计、架构取舍、自动化测试。这些是面试的谈资。',
+       list:['高并发或大数据量的处理','缓存 / 队列 / 异步任务','权限系统与安全设计','CI/CD 与自动化测试']},
+      {h:'复盘与讲解',body:'项目做完不是终点,要能讲清楚:为什么这么设计、遇到什么困难、怎么解决的、学到了什么。把「完成」变成「成长」。'}
+    ]},
+  'g-trend':{title:'当下技术趋势解读',cat:'行业指导 · 行业洞察',summary:'看懂趋势,才能更好地规划学习与职业方向。以下为观点性内容,仅供参考。',
+    sections:[
+      {h:'AI 工程化加速',body:'大模型从「聊天」走向「应用」:RAG、Agent、微调成为主流范式。AI 编程工具也在重塑开发流程,提升单人产出。对开发者而言,学会用 AI 提效、以及围绕 LLM 做应用,是重要增量。'},
+      {h:'云原生成为主流',body:'容器与 K8s 成为部署事实标准,Serverless 与平台工程兴起。运维与基础设施的复杂度在下降,抽象层级在提升。'},
+      {h:'低代码与可视化',body:'低代码平台降低了应用开发门槛,让更多人能做「业务应用」。对专业开发者,价值更多在复杂、定制化、高性能的系统。'},
+      {h:'给学习者的启示',body:'趋势变化很快,但底层能力不变:扎实的计算机基础、独立解决问题的能力、持续学习的态度,永远比追热点更重要。'
+      +'<div class="warn">声明:以上为演示站的观点性内容,不构成职业或投资建议,请结合实际情况判断。</div>'}
+    ]},
+  'g-advice':{title:'给自学者的 5 条建议',cat:'行业指导 · 行业洞察',summary:'自学编程容易陷入「只看不练」的误区,这 5 条建议帮你少走弯路。',
+    sections:[
+      {h:'1. 输入输出并重',body:'看教程是输入,写代码、写笔记、讲给别人是输出。只输入不输出,知识留不住。建议边学边写,做笔记、写博客。'},
+      {h:'2. 项目驱动学习',body:'不要只做「语法练习」,尽早用学到的知识做一个真实小项目,比如个人主页、记账工具、爬虫。项目是最好的老师。'},
+      {h:'3. 学会调试与查错',body:'报错不可怕,可怕的是不会读报错。学会看堆栈、打日志、搜索问题,这是工程师的核心生存技能。'},
+      {h:'4. 建立知识网络',body:'孤立知识点容易忘。把知识按主题组织成体系(如思维导图),新旧知识关联,理解更深、记忆更牢。'},
+      {h:'5. 坚持且保持节奏',body:'编程是长跑,不是冲刺。每天坚持 1–2 小时比周末突击 10 小时更有效。遇到瓶颈很正常,给自己耐心。'}
+    ]},
+  'g-ai':{title:'AI 工程师学习路线',cat:'行业指导 · 学习路线',summary:'面向零基础转 AI 的学习路径,涵盖数学、算法、框架到大模型应用。',
+    sections:[
+      {h:'路线概览',body:'AI 学习遵循「数学 → 算法 → 框架 → 应用」的递进顺序。先打好 Python 与数学基础,再掌握机器学习与深度学习,最后上手大模型应用。',
+       list:['阶段一 Python 与数学基础(约 2 个月)','阶段二 机器学习核心算法(约 2 个月)','阶段三 深度学习框架 PyTorch(约 2 个月)','阶段四 大模型应用与微调(约 2 个月)']},
+      {h:'阶段一:Python 与数学基础',body:'Python 是 AI 的事实语言,线性代数与概率论是算法推导的底子。目标:能熟练处理数据、理解向量与矩阵、掌握基本概率。',
+       list:['Python 语法与数据处理(NumPy/Pandas)','线性代数:向量、矩阵、特征分解','概率与统计:分布、期望、贝叶斯']},
+      {h:'阶段二:机器学习核心算法',body:'掌握监督与无监督学习的经典算法,理解评估与调参。用 Scikit-learn 做实践,比手推公式更重要。',
+       list:['线性回归、逻辑回归、决策树与集成','K-means、PCA 等无监督方法','交叉验证、过拟合与调参']},
+      {h:'阶段三:深度学习框架',body:'以 PyTorch 为主,理解神经网络、反向传播,上手 CNN/RNN/Transformer 等经典结构。',
+       list:['PyTorch 张量与自动求导','CNN 图像、序列模型 NLP','训练技巧与模型评估']},
+      {h:'阶段四:大模型应用',body:'面向大语言模型的应用开发:Prompt 工程、RAG 检索增强、微调与 Agent,是当前最热的方向。',
+       list:['Prompt 工程与结构化提示','RAG 检索增强与向量数据库','LoRA 微调与 Agent 应用']}
+    ]},
+  'g-about':{title:'关于学码网',cat:'关于本站 · 关于本站',summary:'学码网的定位、内容方向与使用方式。',
+    sections:[
+      {h:'关于本站',body:'学码网是一个面向开发者的中文技术学习门户,汇集前端、后端、数据库、移动、人工智能、云计算、嵌入式与计算机基础等方向的中文教程,配以分类导航、行业指导与学习路线,帮助零基础用户系统入门。'},
+      {h:'内容定位',body:'以「从零到系统」为宗旨,每篇教程按难度分为入门、进阶、实战三级,包含章节、示例代码与练习引导;行业指导则覆盖学习路线、职业规划与求职准备。'},
+      {h:'如何使用',body:'通过首页分类卡片或「技术分类」页进入各分类,分类页内支持关键词搜索与难度筛选;点击教程标题即可进入详情页逐章学习。'}
+    ]},
+  'g-notes':{title:'内容说明',cat:'关于本站 · 关于本站',summary:'关于本站示例内容、版权与免责声明。',
+    sections:[
+      {h:'示例内容',body:'本站所有教程与指南均为演示性质,用于展示网站结构与交互能力,不代表完整教学;正文以示例数据呈现,供学习界面与体验之用。'},
+      {h:'版权与引用',body:'文中代码示例为通用教学写法,引用外部信息请以官方文档为准;如需商用或转载,请自行核对来源与授权。'},
+      {h:'免责声明',body:'行业洞察与趋势类内容为观点性文章,仅供参考,不构成职业选择或投资建议;请结合自身情况理性判断。'}
+    ]},
+  'g-tips':{title:'学习建议',cat:'关于本站 · 关于本站',summary:'给自学者的一套可落地的学习方法。',
+    sections:[
+      {h:'先动手再深究',body:'跟着示例把代码跑通、把页面做出来,再回头理解原理,比单纯阅读更有效。'},
+      {h:'输入输出并重',body:'边学边记笔记、写总结,用一个小项目检验理解;「只看不练」是最常见的误区。'},
+      {h:'资料取舍',body:'以官方文档为准,教程作为导航与脚手架;遇到问题多动手排错,逐步建立自己的知识网络。'}
+    ]},
+};
+
+/* ---------- 路由 ---------- */
+const views = ['home','tech','guide','category','article','guidearticle'];
+let currentRoute = 'home';
+
+function render(){
+  const raw = location.hash || '#/home';
+  const hash = raw.replace(/^#\/?/, '');
+  const parts = hash.split('/').filter(Boolean);
+  let route = 'home', param = null;
+  if(parts[0] === 'tech'){ route='tech'; }
+  else if(parts[0] === 'guide'){ route='guide'; }
+  else if(parts[0] === 'category'){ route='category'; param=decodeSafe(parts[1]); }
+  else if(parts[0] === 'article'){ route='article'; param=parts[1]; }
+  else if(parts[0] === 'guidearticle'){ route='guidearticle'; param=parts[1]; }
+  else { route='home'; }
+
+  views.forEach(v=>{ document.getElementById('view-'+v).classList.toggle('active', v===route); });
+  currentRoute = route;
+
+  // 高亮导航
+  document.querySelectorAll('[data-nav]').forEach(a=>{
+    let navTarget = route;
+    if(route==='category') navTarget='tech';
+    if(route==='article'||route==='guidearticle') navTarget='';
+    const match = a.getAttribute('data-nav')===navTarget;
+    a.classList.toggle('active', !!match);
+  });
+
+  // 移动菜单关闭
+  document.getElementById('mobileNav').classList.remove('open');
+
+  // 滚动到顶
+  window.scrollTo({top:0, behavior:'auto'});
+
+  if(route==='category' && param && CAT_META[param]){
+    renderCategory(param);
+  } else if(route==='category'){
+    location.hash = '#/tech';
+  } else if(route==='article' && param && TUTORIALS[param]){
+    renderArticle(param);
+  } else if(route==='guidearticle' && param && GUIDES[param]){
+    renderGuide(param);
+  } else if(route==='article' || route==='guidearticle'){
+    location.hash = route==='article' ? '#/tech' : '#/guide';
+  }
+}
+
+/* ---------- 分类元数据与分类子页面渲染 ---------- */
+const CAT_META = {
+  '前端开发':{color:'#0F766E',bg:'#CCFBF1',desc:'从 HTML、CSS 到 JavaScript 与主流框架,构建用户界面与交互体验,是前端工程师的主战场。'},
+  '后端开发':{color:'#6D28D9',bg:'#EDE9FE',desc:'Python、Java、Go 等语言与服务端框架,负责业务逻辑、数据与接口,是系统稳定运行的后台支撑。'},
+  '数据库':{color:'#B45309',bg:'#FEF3C7',desc:'关系型与非关系型数据库,涵盖数据建模、查询优化与分布式存储,是应用的记忆中枢。'},
+  '移动开发':{color:'#BE185D',bg:'#FCE7F3',desc:'Android、iOS、Flutter 与小程序,面向移动端的原生与跨端应用开发。'},
+  '人工智能':{color:'#0369A1',bg:'#E0F2FE',desc:'机器学习、深度学习与大模型应用,从算法基础到工程实战,拥抱 AI 浪潮。'},
+  '云计算运维':{color:'#15803D',bg:'#DCFCE7',desc:'Linux、容器、云原生与自动化运维,负责部署、监控与基础设施的稳定运行。'},
+  '嵌入式开发':{color:'#4F46E5',bg:'#E0E7FF',desc:'面向 51 单片机与 STM32 等 ARM 芯片,GPIO、中断、定时器与串口,连接硬件与逻辑。'},
+  '计算机基础':{color:'#EA580C',bg:'#FFEDD5',desc:'计算机组成原理、数据结构、算法、设计模式与网络协议,夯实计算机核心基础。'}
+};
+const CAT_ICON = {
+  '前端开发':'<path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  '后端开发':'<path d="M17 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2"/><path d="M12 4v12"/><path d="M8 16l4 4 4-4"/>',
+  '数据库':'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>',
+  '移动开发':'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+  '人工智能':'<path d="M12 3v4"/><path d="M12 17v4"/><path d="M5 12H3"/><path d="M21 12h-2"/><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M4 8l2.5 2.5"/><path d="M20 8l-2.5 2.5"/><path d="M4 16l2.5-2.5"/><path d="M20 16l-2.5-2.5"/>',
+  '云计算运维':'<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>',
+  '嵌入式开发':'<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h6"/>',
+  '计算机基础':'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/>'
+};
+function openCat(cat){ location.hash = '#/category/'+encodeURIComponent(cat); }
+function renderCategory(cat){
+  const layout = document.getElementById('categoryLayout');
+  const meta = CAT_META[cat];
+  const lvOrder = {'入门':0,'进阶':1,'实战':2};
+  const list = Object.keys(TUTORIALS).filter(function(k){ return TUTORIALS[k].cat === cat; }).sort(function(a,b){ return (lvOrder[TUTORIALS[a].level] ?? 9) - (lvOrder[TUTORIALS[b].level] ?? 9); });
+  const data = list.map(function(k){
+    return { k:k, title:TUTORIALS[k].title, summary:TUTORIALS[k].summary, level:TUTORIALS[k].level, chapters:TUTORIALS[k].chapters };
+  });
+  layout.dataset.cat = cat;
+  layout.dataset.lv = 'all';
+  layout.dataset.kw = '';
+  layout.dataset.list = JSON.stringify(data);
+  layout.innerHTML =
+    '<div class="cat-hero">' +
+      '<a class="back" href="#/tech">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> 返回技术分类' +
+      '</a>' +
+      '<div class="cat-hero-head">' +
+        '<div class="cat-hero-icon" style="background:' + meta.bg + ';color:' + meta.color + '"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + CAT_ICON[cat] + '</svg></div>' +
+        '<div>' +
+          '<div class="eyebrow">CATEGORY</div>' +
+          '<h1>' + cat + '</h1>' +
+          '<p>' + meta.desc + ' 本分类共收录 ' + list.length + ' 篇教程,支持搜索与难度筛选。</p>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="cat-filter">' +
+      '<div class="cat-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="catSearch" placeholder="在本分类中搜索教程…" oninput="setCatKw(this.value)"></div>' +
+      '<div class="lv-filter">' +
+        '<button class="lv-btn on" data-lv="all">全部</button>' +
+        '<button class="lv-btn" data-lv="入门">入门</button>' +
+        '<button class="lv-btn" data-lv="进阶">进阶</button>' +
+        '<button class="lv-btn" data-lv="实战">实战</button>' +
+      '</div>' +
+      '<div class="cat-result-count" id="catCount"></div>' +
+    '</div>' +
+    '<div class="cat-list" id="catList"></div>' +
+    '<div class="crumb" style="margin:18px 0 0"><a href="#/home">首页</a> / <a href="#/tech">技术分类</a> / <span>' + cat + '</span></div>';
+  applyCatFilter();
+}
+function applyCatFilter(){
+  const layout = document.getElementById('categoryLayout');
+  if(!layout || !layout.dataset || !layout.dataset.list) return;
+  let all = [];
+  try { all = JSON.parse(layout.dataset.list || '[]'); } catch(e){ return; }
+  const lv = layout.dataset.lv || 'all';
+  const kw = (layout.dataset.kw || '').toLowerCase().trim();
+  let rows = all;
+  if(lv !== 'all') rows = rows.filter(function(x){ return x.level === lv; });
+  if(kw) rows = rows.filter(function(x){ return (x.title + x.summary + x.k).toLowerCase().indexOf(kw) >= 0; });
+  const box = document.getElementById('catList');
+  if(box){
+    if(rows.length === 0){
+      box.innerHTML = '<div class="cat-empty">未找到匹配的教程,换个难度或关键词试试</div>';
+    } else {
+      box.innerHTML = rows.map(function(x){
+        const lm = { '入门':'#CCFBF1/#0F766E', '进阶':'#E0F2FE/#0369A1', '实战':'#DCFCE7/#15803D' };
+        const lv2 = lm[x.level] || '#E2E8F0/#334155';
+        const bg = lv2.split('/')[0], co = lv2.split('/')[1];
+        return '<div class="tut-row cat-row" data-id="' + x.k + '">' +
+          '<span class="rank">' + String(rows.indexOf(x)+1).padStart(2,'0') + '</span>' +
+          '<div class="name"><a class="tut-title-link" href="#/article/' + x.k + '">' + x.title + '</a><small>' + x.summary + '</small></div>' +
+          '<span class="level" style="background:' + bg + ';color:' + co + '">' + x.level + '</span>' +
+          '<span class="meta">' + x.chapters + ' 章节</span>' +
+          '</div>';
+      }).join('');
+    }
+  }
+  document.querySelectorAll('.lv-btn').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-lv') === lv);
+  });
+  const cc = document.getElementById('catCount');
+  if(cc) cc.textContent = (lv === 'all' ? '' : lv + ' · ') + rows.length + ' / ' + all.length + ' 篇';
+}
+function setCatKw(v){
+  const layout = document.getElementById('categoryLayout');
+  if(!layout || !layout.dataset) return;
+  layout.dataset.kw = v;
+  applyCatFilter();
+}
+function setCatLevel(lv){
+  const layout = document.getElementById('categoryLayout');
+  if(!layout || !layout.dataset) return;
+  layout.dataset.lv = lv;
+  applyCatFilter();
+}
+
+/* ---------- 教程详情渲染 ---------- */
+function renderArticle(id){
+  const t = TUTORIALS[id];
+  const layout = document.getElementById('articleLayout');
+  const toc = t.sections.map((s,i)=>`<a href="#/article/${id}" class="${i===0?'on':''}" onclick="scrollToSection(${i});return false;">${s.h}</a>`).join('');
+  let body = t.sections.map(s=>{
+    let html = `<h2>${s.h}</h2>`;
+    if(s.body) html += `<p>${s.body}</p>`;
+    if(s.pre) html += `<pre><code>${escapeHtml(s.pre)}</code></pre>`;
+    if(s.list) html += `<ul>${s.list.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+    return html;
+  }).join('');
+  layout.innerHTML = `
+    <aside class="content-sidebar">
+      <a class="back" href="#/tech" onclick="go('tech','${t.cat}');return false;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> 返回技术分类
+      </a>
+      <nav>${toc}</nav>
+    </aside>
+    <article class="content-main">
+      <div class="article">
+        <div class="crumb">
+          <a href="#/home">首页</a> / <a href="#/tech">技术分类</a> / <span>${t.cat}</span> / <span>${t.title}</span>
+        </div>
+        <h1>${t.title}</h1>
+        <div class="lede">${t.summary} · 共 ${t.chapters} 章节 · 等级:${t.level}</div>
+        ${body}
+        <div class="tip">本节为学码网演示内容。完整教程会按章节逐步展开,并配套实例代码与练习题。</div>
+      </div>
+    </article>`;
+  layout.querySelectorAll('nav a').forEach((a,i)=>{ a.setAttribute('data-idx',i); });
+}
+
+function scrollToSection(i){
+  const layout = document.getElementById('articleLayout');
+  layout.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on', a.getAttribute('data-idx')==String(i)));
+}
+
+/* ---------- 指南详情渲染 ---------- */
+function renderGuide(id){
+  const g = GUIDES[id];
+  const layout = document.getElementById('guideLayout');
+  let body = g.sections.map(s=>{
+    let html = `<h2>${s.h}</h2>`;
+    if(s.body) html += `<p>${s.body}</p>`;
+    if(s.pre) html += `<pre><code>${escapeHtml(s.pre)}</code></pre>`;
+    if(s.list) html += `<ul>${s.list.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+    return html;
+  }).join('');
+  layout.innerHTML = `
+    <aside class="content-sidebar">
+      <a class="back" href="#/guide" onclick="go('guide','${g.cat.split('·')[1]?g.cat.split('·')[1].trim():''}');return false;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> 返回行业指导
+      </a>
+      <nav>
+        ${g.sections.map((s,i)=>`<a href="#/guidearticle/${id}" onclick="highlightGuide(this);return false;">${s.h}</a>`).join('')}
+      </nav>
+    </aside>
+    <article class="content-main">
+      <div class="article">
+        <div class="crumb"><a href="#/home">首页</a> / <a href="#/guide">行业指导</a> / <span>${g.title}</span></div>
+        <h1>${g.title}</h1>
+        <div class="lede">${g.summary}</div>
+        ${body}
+        <div class="warn">本文为学码网演示站的示例内容,观点与数据仅供参考,不构成职业或投资建议。</div>
+      </div>
+    </article>`;
+}
+function highlightGuide(el){
+  el.parentNode.querySelectorAll('a').forEach(a=>a.classList.remove('on'));
+  el.classList.add('on');
+}
+
+/* ---------- 跳转(带分类定位) ---------- */
+function go(view, target){
+  if(view==='tech'){
+    location.hash='#/tech';
+    setTimeout(()=>{
+      const blocks=[...document.querySelectorAll('.category-block[data-cat]')];
+      const targetBlock = target ? blocks.find(b=>b.getAttribute('data-cat')===target) : null;
+      if(targetBlock) targetBlock.scrollIntoView({behavior:'smooth', block:'start'});
+    },60);
+  } else if(view==='guide'){
+    location.hash='#/guide';
+    setTimeout(()=>{
+      const blocks=[...document.querySelectorAll('#view-guide .category-block[data-cat]')];
+      const targetBlock = target ? blocks.find(b=>b.getAttribute('data-cat')===target) : null;
+      if(targetBlock) targetBlock.scrollIntoView({behavior:'smooth', block:'start'});
+    },60);
+  } else {
+    location.hash='#/'+view;
+  }
+}
+
+/* ---------- 打开教程 / 指南 ---------- */
+function openTut(title,id){ location.hash = '#/article/'+id; }
+function openGuide(title,id){ location.hash = '#/guidearticle/'+id; }
+
+/* ---------- 工具函数 ---------- */
+function decodeSafe(v){
+  try { return decodeURIComponent(v||''); } catch(e){ return v; }
+}
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ---------- 搜索 ---------- */
+const searchBox=document.getElementById('searchInput');
+const mobileSearch=document.getElementById('mobileSearchInput');
+const resultBox=document.getElementById('searchResult');
+
+function buildIndex(){
+  const idx=[];
+  Object.keys(TUTORIALS).forEach(k=>{
+    const t=TUTORIALS[k];
+    idx.push({type:'教程', title:t.title, cat:t.cat, route:'#/article/'+k, keys:(t.title+t.cat+t.summary)});
+  });
+  Object.keys(GUIDES).forEach(k=>{
+    const g=GUIDES[k];
+    idx.push({type:'指南', title:g.title, cat:g.cat, route:'#/guidearticle/'+k, keys:(g.title+g.cat+g.summary)});
+  });
+  return idx;
+}
+const INDEX=buildIndex();
+
+function runSearch(kw){
+  kw=kw.trim().toLowerCase();
+  if(!kw){ resultBox.classList.remove('open'); return; }
+  const hits=INDEX.filter(x=>x.keys.toLowerCase().includes(kw)).slice(0,8);
+  if(hits.length===0){
+    resultBox.innerHTML='<div class="s-empty">未找到相关内容,换个关键词试试</div>';
+  } else {
+    resultBox.innerHTML=hits.map(h=>`<div class="s-item" onclick="pickSearch('${h.route}')"><span class="t">${h.title}</span><span class="c">${h.type}</span></div>`).join('');
+  }
+  resultBox.classList.add('open');
+}
+function pickSearch(route){
+  resultBox.classList.remove('open');
+  searchBox.value=''; mobileSearch.value='';
+  location.hash=route;
+}
+searchBox.addEventListener('input',()=>{ runSearch(searchBox.value); mobileSearch.value=searchBox.value; });
+mobileSearch.addEventListener('input',()=>{ runSearch(mobileSearch.value); searchBox.value=mobileSearch.value; });
+document.addEventListener('click',(e)=>{
+  if(!e.target.closest('.search-box') && !e.target.closest('.mobile-search')) resultBox.classList.remove('open');
+});
+
+/* ---------- 分类子页面:难度筛选 / 教程行跳转委托 ---------- */
+document.addEventListener('click', function(e){
+  if(!e.target || !e.target.closest) return;
+  const lb = e.target.closest('.lv-btn');
+  if(lb){ setCatLevel(lb.getAttribute('data-lv')); return; }
+  if(e.target.closest('a')) return;
+  const row = e.target.closest('.cat-row');
+  if(row){ const id = row.getAttribute('data-id'); if(id) location.hash = '#/article/' + id; }
+});
+
+/* ---------- 移动端菜单 ---------- */
+const menuBtn=document.getElementById('menuBtn');
+const mobileNav=document.getElementById('mobileNav');
+menuBtn.addEventListener('click',()=>{
+  const open=mobileNav.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+
+/* ---------- 路由监听 ---------- */
+window.addEventListener('hashchange', render);
+window.addEventListener('load', render);
+</script>
+
